@@ -6,27 +6,34 @@
         android:id="@+id/action_Connect_Disconnect_TCP_IP"
         android:checkable="true"
         android:checked="false"
-        android:icon="@android:drawable/checkbox_off_background"
+        android:icon="@drawable/ic_otkl"
+        android:menuCategory="container"
         android:title="@string/disconnected"
-        app:showAsAction="ifRoom" />
+        android:visible="true"
+        app:showAsAction="always" />
     <item
         android:id="@+id/clearChat"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:menuCategory="container"
         android:title="@string/ClearChat"
         android:visible="true"
-        app:showAsAction="collapseActionView"
-        />
-    <item
-        android:id="@+id/oProgramme"
-        android:icon="@android:drawable/ic_menu_share"
-        android:title="@string/oProgramme"
-        app:showAsAction="collapseActionView"
-        />
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_settings"
         android:checkable="false"
         android:checked="false"
         android:icon="@android:drawable/ic_menu_manage"
+        android:menuCategory="container"
         android:title="@string/Settings"
-        app:showAsAction="always" />
+        android:visible="true"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/oProgramme"
+        android:icon="@android:drawable/ic_menu_share"
+        android:menuCategory="container"
+        android:title="@string/oProgramme"
+        android:visible="true"
+        app:showAsAction="ifRoom"
+        />
+
 </menu>

@@ -1,17 +1,93 @@
 <resources>
-    <string name="app_name">tcp_ip_client_2</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Serial Tool Kit</string>
+    <string name="nav_header_subtitle">des808@inbox.ru</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="disconnected">disconnected</string>
+    <string name="app_name">TCP IP Client</string>
+    <string name="serverlist">Server List</string>
+    <string name="add">ADD</string>
+    <string name="ip_adress">IP Address</string>
+    <string name="name">Name</string>
+    <string name="port">Port</string>
+    <string name="button">ADD</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="_out_">Так ты точно хочеш выйти???</string>
+    <string name="space" />
+    <string name="xz">что-то не так</string>
+    <string name="textview">какая-то хуйня</string>
+    <string name="sdfs">абракадабра</string>
+    <string name="dvoetochie">:</string>
+    <string name="vedro">Connect Vedromeda gprs.so-ro.ru:10003</string>
+    <string name="zone">zone</string>
+    <string name="razdel">razdel</string>
+    <string name="object">object</string>
+    <string name="andromeda">Andromeda</string>
+    <string name="settings">Настройки</string>
+    <string-array name="podMenu">
+        <item>Редактировать</item>
+        <item>Удалить</item>
+    </string-array>
+    <!-- Strings related to login -->
+    <string name="prompt_login">Login</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="Settings">Настройки</string>
+    <string name="disconnect_tcp_ip">Disconnect TCP IP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="e602">E602</string>
+    <string name="_00">00</string>
+    <string name="_000">000</string>
+    <string name="_4444">4444</string>
+    <string name="_class">class</string>
+    <string name="send">Send >></string>
+    <string name="description_voice_call">voice_call</string>
+    <string name="hint_input">new message</string>
+    <string name="todo">TODO</string>
+    <string name="soobsheniye">сообщение</string>
+    <string name="_23_54">23:54</string>
+    <string name="isconnected">isConnected</string>
     <string name="ClearChat">Очистить чат</string>
     <string name="oProgramme">О программе</string>
-    <string name="Settings">Настройки</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="title">Title</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="connecting">Connecting</string>
+    <string name="_10003">10003</string>
+    <string name="open">Open</string>
+    <string name="server_list">Server List</string>
+    <string name="todo2">TODO</string>
+    <string name="searchPorts">Поиск открытых портов</string>
+    <string name="r_n">Стартr\nпоиск</string>
+
+
 </resources>
