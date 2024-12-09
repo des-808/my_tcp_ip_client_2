@@ -1,0 +1,175 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_listview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+
+    <TextView
+        android:id="@+id/row_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:paddingStart="2sp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/row_ipadress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="ведромеда" />
+
+    <ImageView
+        android:id="@+id/connect_ip_image"
+        android:layout_width="15dp"
+        android:layout_height="23dp"
+        android:paddingStart="2sp"
+        android:rotation="-90"
+        android:scaleType="center"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/row_ipadress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/row_name"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/yellow_dot7x7"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@android:drawable/button_onoff_indicator_on" />
+    <TextView
+        android:id="@+id/row_ipadress"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingStart="2sp"
+        android:paddingEnd="3sp"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/my_listview"
+        app:layout_constraintEnd_toStartOf="@id/dvoetochie_"
+        app:layout_constraintStart_toEndOf="@+id/connect_ip_image"
+        app:layout_constraintTop_toBottomOf="@id/row_name"
+        tools:text="87.117.4.82" />
+
+    <TextView
+        android:id="@+id/dvoetochie_"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/dvoetochie"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/row_name"
+        app:layout_constraintStart_toEndOf="@id/row_ipadress"
+        app:layout_constraintEnd_toStartOf="@id/connect_port_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text=":" />
+
+
+    <ImageView
+        android:id="@+id/connect_port_image"
+        android:layout_width="15dp"
+        android:layout_height="23dp"
+        android:paddingStart="2sp"
+        android:rotation="-90"
+        android:scaleType="center"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="@id/my_listview"
+        app:layout_constraintEnd_toStartOf="@id/row_port"
+        app:layout_constraintStart_toEndOf="@id/dvoetochie_"
+        app:srcCompat="@drawable/yellow_dot7x7"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@android:drawable/button_onoff_indicator_on" />
+
+    <TextView
+        android:id="@+id/row_port"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:paddingStart="3sp"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/connect_port_image"
+
+
+        app:layout_constraintTop_toBottomOf="@id/row_name"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="10003" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--
+
+    <ImageView
+    android:id="@+id/connect_image"
+    android:layout_width="12dp"
+    android:layout_height="50dp"
+    android:paddingStart="2sp"
+    android:textAlignment="textStart"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/row_name"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@android:drawable/presence_offline"
+    tools:ignore="ContentDescription" />
+
+
+    <TextView
+    android:id="@+id/row_name"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:paddingStart="2sp"
+    android:textSize="24sp"
+    app:layout_constraintBottom_toTopOf="@id/row_ipadress"
+    app:layout_constraintEnd_toEndOf="@id/my_listview"
+    app:layout_constraintStart_toEndOf="@id/connect_image"
+    app:layout_constraintTop_toTopOf="@id/my_listview"
+    app:layout_constraintVertical_bias="1.0"
+    tools:text="ведромеда" />
+
+
+    <TextView
+    android:id="@+id/row_ipadress"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingStart="2sp"
+    android:paddingEnd="3sp"
+    android:textAlignment="textStart"
+    android:textSize="18sp"
+    app:layout_constraintBottom_toBottomOf="@id/my_listview"
+    app:layout_constraintEnd_toStartOf="@id/dvoetochie_"
+    app:layout_constraintStart_toEndOf="@+id/connect_image"
+    app:layout_constraintTop_toBottomOf="@id/row_name"
+    tools:text="87.117.4.82" />
+
+    <TextView
+    android:id="@+id/dvoetochie_"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:text="@string/dvoetochie"
+    android:textSize="18sp"
+    android:visibility="visible"
+    app:layout_constraintTop_toBottomOf="@id/row_name"
+    app:layout_constraintStart_toEndOf="@id/row_ipadress"
+    app:layout_constraintEnd_toStartOf="@id/row_port"
+    app:layout_constraintBottom_toBottomOf="@id/my_listview"
+    tools:text=":" />
+
+    <TextView
+    android:id="@+id/row_port"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:paddingStart="3sp"
+    android:textAlignment="textStart"
+    android:textSize="18sp"
+    android:visibility="visible"
+    app:layout_constraintBottom_toBottomOf="@id/my_listview"
+    app:layout_constraintEnd_toEndOf="@id/my_listview"
+    app:layout_constraintStart_toEndOf="@id/dvoetochie_"
+
+
+    app:layout_constraintTop_toBottomOf="@id/row_name"
+    app:layout_constraintVertical_bias="0.0"
+    tools:text="10003" />-->

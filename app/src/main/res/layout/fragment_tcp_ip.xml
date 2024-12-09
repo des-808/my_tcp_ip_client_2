@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backGroundMyApp"
+    android:orientation="vertical"
+    tools:context=".ui.title.tcp_ip.TCP_IP_Fragment"
+    >
+
+    <TextView
+        android:id="@+id/connect_text"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@android:color/background_dark"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.Compat.Notification.Title"
+        android:textColor="@color/colorPraimary"
+        android:textSize="14sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/list_messages"
+         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_messages"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/collorDark"
+        app:layout_constraintBottom_toTopOf="@id/containerFrameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connect_text"
+        app:layout_constraintVertical_weight="10" />
+<FrameLayout
+    android:id="@+id/containerFrameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintVertical_weight="1.1"
+    app:layout_constraintHorizontal_weight="1.1"
+    app:layout_constraintTop_toBottomOf="@+id/list_messages"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
+    <include
+        android:id="@+id/fragmentLayout"
+        layout="@layout/row_andromeda_send"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<include
+android:id="@+id/fragmentLayout"
+layout="@layout/row_chat_send"
+layout="@layout/row_andromeda_send"
+android:visibility="visible"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+
+app:layout_constraintVertical_weight="1.1"
+app:layout_constraintHorizontal_weight="1.1"
+
+app:layout_constraintTop_toBottomOf="@+id/list_messages"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintBottom_toBottomOf="parent"
+    />  -->
+
+
+
+
+<!--    <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:background="@color/backGroundMyApp"
+android:orientation="vertical"
+tools:context=".fragments.fragment_titles"
+    >
+
+<TextView
+    android:id="@+id/connect_text"
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    android:background="@android:color/background_dark"
+    android:textAlignment="textStart"
+    android:textAllCaps="false"
+    android:textAppearance="@style/TextAppearance.Compat.Notification.Title"
+    android:textColor="@color/colorPraimary"
+    android:textSize="14sp"
+    android:textStyle="bold|italic"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/list_messages"
+    />
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/list_messages"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@color/collorDark"
+    app:layout_constraintBottom_toTopOf="@id/fragmentLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/connect_text"
+    app:layout_constraintVertical_weight="10" />
+
+<include
+    android:id="@+id/fragmentLayout"
+
+    layout="@layout/row_andromeda_send"
+    android:visibility="visible"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    app:layout_constraintVertical_weight="1.1"
+    app:layout_constraintHorizontal_weight="1.1"
+
+    app:layout_constraintTop_toBottomOf="@+id/list_messages"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
+
+

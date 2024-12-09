@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/app_bar_elevation">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_in"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/llOut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/llIn"
+        app:layout_constraintTop_toTopOf="parent" />
+<LinearLayout
+    android:id="@+id/llIn"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/message_incoming"
+    android:padding="4dp"
+    android:layout_margin="4dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/root_in"
+    app:layout_constraintBottom_toTopOf="@+id/llOut"
+    >
+
+    <TextView
+        android:id="@+id/messageIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:gravity="start"
+        android:hint="@string/soobsheniye"
+        android:textColor="@color/colorPrimaryGreen"
+        android:textSize="@dimen/message_text_size" />
+
+    <TextView
+        android:id="@+id/time_stampIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="8dp"
+        android:hint="@string/_23_54"
+        android:textAlignment="textEnd"
+        android:textColor="@color/material_dynamic_neutral50"
+        android:textSize="@dimen/time_text_size" />
+</LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_out"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/llIn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/llOut"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/llOut"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/message_outgoing"
+        android:padding="4dp"
+        android:layout_margin="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/llIn"
+        app:layout_constraintStart_toEndOf="@id/root_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/messageOut"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+
+            android:layout_weight="4"
+            android:hint="@string/soobsheniye"
+            android:textColor="@color/colorPrimaryGreen"
+            android:textSize="@dimen/message_text_size" />
+
+        <TextView
+            android:id="@+id/time_stampOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/_23_54"
+            android:textAlignment="textEnd"
+            android:textColor="@color/material_dynamic_neutral50"
+            android:textSize="@dimen/time_text_size" />
+</LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+   <!-- android:background="@color/collorDark"-->

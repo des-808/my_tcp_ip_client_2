@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_ip_adress"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="start"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <TextView
+        android:id="@+id/_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/detailsName"
+        />
+
+    <EditText
+        android:id="@+id/detailsName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/space"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        app:layout_constraintTop_toTopOf="@id/_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/_ip_adress"
+         />
+
+    <TextView
+        android:id="@+id/_ip_adress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ip_adress"
+        app:layout_constraintTop_toBottomOf="@id/detailsName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/detailsIpAdr"
+         />
+
+    <EditText
+        android:id="@+id/detailsIpAdr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/space"
+        android:inputType="textWebEditText"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/_ip_adress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/_port"/>
+
+    <TextView
+        android:id="@+id/_port"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/port"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/detailsIpAdr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/detailsPort"
+        />
+
+    <EditText
+        android:id="@+id/detailsPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/space"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textIsSelectable="false"
+        app:layout_constraintTop_toBottomOf="@id/_port"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/fragment_ip_adress"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:gravity="start"
+android:orientation="vertical"
+android:visibility="visible">
+
+
+
+<androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideline2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" />
+
+<TextView
+    android:id="@+id/_name"
+    android:layout_width="152dp"
+    android:layout_height="wrap_content"
+    android:text="@string/name"
+    android:visibility="visible" />
+
+<EditText
+    android:id="@+id/detailsName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/space"
+    android:inputType="textPersonName"
+    android:selectAllOnFocus="true"
+    android:singleLine="true"
+    android:visibility="visible" />
+
+<TextView
+    android:id="@+id/_ip_adress"
+    android:layout_width="152dp"
+    android:layout_height="wrap_content"
+    android:text="@string/ip_adress"
+    android:visibility="visible" />
+
+<EditText
+    android:id="@+id/detailsIpAdr"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/space"
+    android:inputType="textWebEditText"
+    android:selectAllOnFocus="true"
+    android:singleLine="true"
+    android:visibility="visible" />
+
+<TextView
+    android:id="@+id/_port"
+    android:layout_width="152dp"
+    android:layout_height="wrap_content"
+    android:text="@string/port"
+    android:visibility="visible" />
+
+<EditText
+    android:id="@+id/detailsPort"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/space"
+    android:inputType="number"
+    android:selectAllOnFocus="true"
+    android:singleLine="true"
+    android:textIsSelectable="false"
+    android:visibility="visible" />
+
+
+</LinearLayout>
