@@ -16,9 +16,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+            //maven { url 'https://jitpack.io' }
     }
 }
 
 rootProject.name = "tcp_ip_client_2"
 include(":app")
- 

@@ -1,0 +1,156 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.preferences.SharedPreferenceFragment">
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/FontSize_entries"
+        android:entryValues="@array/FontSize_values"
+        android:key="FontSize"
+        android:title="Font size"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/FontStyle_entries"
+        android:entryValues="@array/FontStyle_values"
+        android:key="FontStyle"
+        android:title="Font Style"
+        app:enableCopying="true"
+        app:enabled="true"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/Charset_entries"
+        android:entryValues="@array/Charset_values"
+        android:key="Charset"
+        android:title="Charset"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/DisplayMode_entries"
+        android:entryValues="@array/DisplayMode_values"
+        android:key="DisplayMode"
+        android:title="Display Mode"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+    <SwitchPreference
+        android:key="AutoScroll"
+        android:title="Auto scroll to end of buffer"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true"/>
+    <SwitchPreference
+        android:key="ShowConnectionMessages"
+        android:title="Show Connection Messages"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true"/>
+    <SwitchPreference
+        android:key="ShowTimestamps"
+        android:title="Show Timestamps"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true"/>
+    <MultiSelectListPreference
+        android:dependency="ShowTimestamps"
+        android:defaultValue="@array/TimestampFormat_entries"
+        android:entries="@array/TimestampFormat_values"
+        android:entryValues="@array/TimestampFormat_entries"
+        android:key="TimestampFormat"
+        android:title="Timestamp Format"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:iconSpaceReserved="false"/>
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/BufferSize_entries"
+        android:entryValues="@array/BufferSize_values"
+        android:key="BufferSize"
+        android:title="Buffer Size"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+
+
+    <!--<PreferenceCategory app:title="@string/messages_header">
+
+        <EditTextPreference
+            app:key="signature_messages"
+            app:title="@string/signature_title_messages"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="reply"
+            app:entries="@array/reply_entries"
+            app:entryValues="@array/reply_values"
+            app:key="reply_values"
+            app:title="@string/reply_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/sync_header">
+
+        <SwitchPreferenceCompat
+            app:key="sync2"
+            app:title="@string/sync_title" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync2"
+            app:key="attachment2"
+            app:summaryOff="@string/attachment_summary_off"
+            app:summaryOn="@string/attachment_summary_on"
+            app:title="@string/attachment_title" />
+        <CheckBoxPreference
+            app:defaultValue="false"
+            app:key="silent mode2"
+            app:summary="Mute all sounds from this app"
+            app:title="Silent Mode 2" />
+        <SwitchPreference
+            app:defaultValue="false"
+            app:key="custom_storage2"
+            app:summary="Enable the Awesome Mode feature"
+            app:switchTextOff="No"
+            app:switchTextOn="Yes"
+            app:title="Awesome Mode xz" />
+        <SwitchPreference
+
+            app:defaultValue="false"
+            app:key="xz23"
+            app:summary="Enable "
+            app:switchTextOff="No"
+            app:switchTextOn="Yes"
+            app:title="xz" />
+        <SwitchPreference
+            app:defaultValue="true"
+            app:dependency="xz23"
+            app:key="switch_andromeda_test"
+            app:summary="Выкл чат, Вкл Андромеда"
+            app:summaryOff="Режим чата"
+            app:summaryOn="Режим Hex"
+            app:switchTextOff="No"
+            app:switchTextOn="Yes"
+            app:title="Выкл чат, Вкл Андромеда" />
+
+    </PreferenceCategory>-->
+
+
+</PreferenceScreen>

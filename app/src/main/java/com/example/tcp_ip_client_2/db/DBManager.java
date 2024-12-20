@@ -36,11 +36,21 @@ public class DBManager {
         dbHelper = new DBHelper( context );
     }
     //открытие БД
-    public void openBd(){db = dbHelper.getWritableDatabase();}
+    public void openBd()
+    {
+        if (db == null || !db.isOpen()) {
+            db = dbHelper.getWritableDatabase();
+        }
+    }
 
     //закрытие БД
-    public void closeBd(){db.close();
-        cursor.close();}
+    /*public void closeBd(){db.close();
+        cursor.close();}*/
+    public void closeBd() {
+        if (db != null && db.isOpen()) {
+            db.close();
+        }
+    }
 
     //получение полного списка контактов
     public ArrayList<TitleChatsItems>getAllContacts(){

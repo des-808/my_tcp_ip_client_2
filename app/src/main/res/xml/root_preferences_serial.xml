@@ -1,0 +1,62 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.preferences.SharedPreferenceFragment">
+
+
+    <ListPreference
+        android:defaultValue="5"
+        android:entries="@array/BoudRate_entries"
+        android:entryValues="@array/BoudRate_values"
+        android:key="BoudRate"
+        android:title="Boud Rate"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+    <ListPreference
+        android:defaultValue="4"
+        android:entries="@array/DataBits_entries"
+        android:entryValues="@array/DataBits_values"
+        android:key="DataBits"
+        android:title="Data bits"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/Parity_entries"
+        android:entryValues="@array/Parity_values"
+        android:key="Parity"
+        android:title="Parity"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/StopBits_entries"
+        android:entryValues="@array/StopBits_values"
+        android:key="StopBits"
+        android:title="Stop Bits"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+    <SwitchPreference
+        android:key="ShowControlLines"
+        android:title="Show Control Lines"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true"/>
+        <!--app:summary="Mute all sounds from this app"-->
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/FlowControl_entries"
+        android:entryValues="@array/FlowControl_values"
+        android:key="FlowControl"
+        android:title="Flow Control"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+    <EditTextPreference
+        app:defaultValue="100"
+        app:dialogMessage="@string/BREAK_duration"
+        app:iconSpaceReserved="false"
+        app:key="BREAK_duration"
+        app:singleLineTitle="false"
+        app:title="BREAK duration"
+        app:useSimpleSummaryProvider="true" />
+</PreferenceScreen>
+

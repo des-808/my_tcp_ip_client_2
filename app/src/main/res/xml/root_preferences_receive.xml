@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.preferences.SharedPreferenceFragment">
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/NewLineReceive_entries"
+        android:entryValues="@array/NewLineReceive_values"
+        android:key="Newline"
+        android:title="Newline"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+</PreferenceScreen>

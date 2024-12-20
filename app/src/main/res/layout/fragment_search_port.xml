@@ -5,15 +5,18 @@
     android:id="@+id/search_port"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     android:clickable="false"
+    tools:actionBarNavMode="standard"
     tools:context=".ui.search_ports.SearchPortsFragment">
 
     <Spinner
         android:id="@+id/spinner_search_ports"
         android:layout_width="0dp"
-        android:layout_height="34dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="44dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toTopOf="@+id/table_search_ports_list"
         app:layout_constraintEnd_toStartOf="@id/floatingActionButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +34,7 @@
         app:layout_constraintBottom_toTopOf="@id/table_search_ports_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_search_category_default" />
+        app:srcCompat="@drawable/btn_play25" />
 
     <ListView
         android:id="@+id/table_search_ports_list"
@@ -45,25 +48,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinner_search_ports" />
     <!--android:background="@android:color/darker_gray"-->
+
+
     <ProgressBar
         android:id="@+id/progress_bar_searchPorts"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginStart="5dp"
-
         android:layout_marginEnd="5dp"
         android:indeterminateBehavior="cycle"
-
+        android:max="65536"
         android:progress="0"
         android:progressTint="#2BE00A"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/table_search_ports_list" />
 
 
 
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

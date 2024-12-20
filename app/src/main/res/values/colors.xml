@@ -14,8 +14,9 @@
     <color name="colorOrange">#F26A00</color>
     <color name="colorPrimaryGreen">#37d842</color>
     <color name="colorPrimaryGrey">#000000</color>
+    <color name="colorGrey">#626262</color>
     <color name="colorAccent">#0d0206</color>
-    <color name="collorDark">#000000</color>
+    <color name="colorDark">#000000</color>
 
     <color name="primary">#008577</color>
     <color name="primary_dark">#00574B</color>

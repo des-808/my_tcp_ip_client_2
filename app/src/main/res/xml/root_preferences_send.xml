@@ -1,0 +1,61 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.preferences.SharedPreferenceFragment">
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/NewLineSend_entries"
+        android:entryValues="@array/NewLineSend_values"
+        android:key="Newline"
+        android:title="Newline"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/EditMode_entries"
+        android:entryValues="@array/EditMode_values"
+        android:key="EditMode"
+        android:title="Edit mode"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+    <EditTextPreference
+        app:defaultValue="0"
+        app:dialogMessage="Minimum time between consecutive lines [mS]. Usually used for multiline macros and file upload in line mode"
+        app:iconSpaceReserved="false"
+        app:key="LineDelay"
+        app:negativeButtonText="Отмена"
+        app:title="Line delay"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+    <EditTextPreference
+        app:defaultValue="0"
+        app:dialogMessage="Minimum time between consecutive bytes/characters [mS]."
+        app:iconSpaceReserved="false"
+        app:key="CharacterDelay"
+        app:negativeButtonText="Отмена"
+        app:summary="ms"
+        app:title="Character delay"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true" />
+    <SwitchPreference
+        android:key="LocalEcho"
+        android:title="Show send data in terminal"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true"/>
+    <SwitchPreference
+        android:key="ClearInputOnSend"
+        android:title="Clear Input On Send"
+        app:iconSpaceReserved="false"
+        app:persistent="true"
+        app:singleLineTitle="true"
+        app:useSimpleSummaryProvider="true"/>
+</PreferenceScreen>

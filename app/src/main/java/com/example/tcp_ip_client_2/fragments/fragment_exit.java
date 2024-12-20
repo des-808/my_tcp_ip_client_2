@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tcp_ip_client_2.MainActivity;
+import com.example.tcp_ip_client_2.ui.home.HomeFragment;
 
 
 @SuppressLint("ValidFragment")
@@ -29,10 +30,10 @@ public class fragment_exit extends DialogFragment {
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         builder.setIcon(android.R.drawable.ic_dialog_alert);
         return builder.setTitle(title).setPositiveButton( "OK", (dialog, whichButton) -> {
-            ((MainActivity) getActivity()).doPositiveClick();
+            ((HomeFragment) getParentFragment()).doPositiveClick();
         })
                 .setNegativeButton( "Cancel", (dialog, whichButton) -> {
-                    ((MainActivity) getActivity()).doNegativeClick();
+                    ((HomeFragment) getParentFragment()).doNegativeClick();
                 }).create();
 
 

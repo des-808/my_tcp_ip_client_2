@@ -8,7 +8,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_usb">USB</string>
     <string name="app_name">TCP IP Client</string>
     <string name="serverlist">Server List</string>
     <string name="add">ADD</string>
@@ -56,6 +56,7 @@
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
+    <string name="signature_title_messages">Your signature messages</string>
     <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
@@ -87,7 +88,13 @@
     <string name="server_list">Server List</string>
     <string name="todo2">TODO</string>
     <string name="searchPorts">Поиск открытых портов</string>
-    <string name="r_n">Стартr\nпоиск</string>
+    <string name="r_n">Старт\nпоиск</string>
+    <string name="start_pause_searchports">start_pause_searchports</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="monday">Monday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="obshie_nastroiyki">Общие настройки</string>
+    <string name="BREAK_duration">Length of BREAK signal [ms]</string>
 
 
 </resources>

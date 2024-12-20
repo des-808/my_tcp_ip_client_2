@@ -1,6 +1,8 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:allowDividerAbove="true"
+    app:allowDividerBelow="true"
     tools:context=".ui.preferences.SharedPreferenceFragment">
 
     <PreferenceCategory app:title="@string/messages_header">
@@ -33,36 +35,37 @@
             app:summaryOn="@string/attachment_summary_on"
             app:title="@string/attachment_title" />
         <CheckBoxPreference
+            app:defaultValue="false"
             app:key="silent mode"
-            app:defaultValue="false"
-            app:title="Silent Mode"
-            app:summary="Mute all sounds from this app"/>
+            app:summary="Mute all sounds from this app"
+            app:title="Silent Mode" />
         <SwitchPreference
-            app:key="custom_storage"
             app:defaultValue="false"
-            app:switchTextOn="Yes"
+            app:key="custom_storage"
+            app:summary="Enable the Awesome Mode feature"
             app:switchTextOff="No"
-            app:title="Awesome Mode"
-            app:summary="Enable the Awesome Mode feature"/>
+            app:switchTextOn="Yes"
+            app:title="Awesome Mode" />
         <SwitchPreference
 
-            app:key="xz2"
             app:defaultValue="false"
-            app:switchTextOn="Yes"
+            app:key="xz2"
+            app:summary="Enable "
             app:switchTextOff="No"
-            app:title="xz"
-            app:summary="Enable "/>
+            app:switchTextOn="Yes"
+            app:title="xz" />
         <SwitchPreference
+            app:defaultValue="true"
             app:dependency="xz2"
             app:key="switch_andromeda"
-            app:defaultValue="true"
-            app:switchTextOn="Yes"
-            app:switchTextOff="No"
-            app:title="Выкл чат, Вкл Андромеда"
+            app:summary="Выкл чат, Вкл Андромеда"
             app:summaryOff="Режим чата"
             app:summaryOn="Режим Hex"
-            app:summary="Выкл чат, Вкл Андромеда"/>
+            app:switchTextOff="No"
+            app:switchTextOn="Yes"
+            app:title="Выкл чат, Вкл Андромеда" />
 
     </PreferenceCategory>
+
 
 </PreferenceScreen>

@@ -1,0 +1,46 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.preferences.SettingsFragment">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:background="#000000"
+        android:scrollbarSize="2dp"
+        app:layout_constraintBottom_toTopOf="@id/pager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@drawable/side_nav_bar"
+        app:tabGravity="fill"
+        app:tabIconTintMode="add"
+        app:tabIndicator="@android:drawable/button_onoff_indicator_on"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorGravity="bottom"
+        app:tabInlineLabel="true"
+        app:tabMode="auto"
+        app:tabPadding="15dp"
+        app:tabPaddingEnd="1dp"
+        app:tabPaddingStart="1dp"
+        app:tabRippleColor="#4CAF50"
+        app:tabSelectedTextColor="#FFFFFF"
+        app:tabTextAppearance="@style/TextAppearance.AppCompat.Large"
+        app:tabTextColor="#000000"
+        app:tabUnboundedRipple="false" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

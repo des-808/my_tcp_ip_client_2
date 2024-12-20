@@ -129,6 +129,7 @@ implements  TCPListener,
     public void onCreate(@Nullable Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
         super.onCreate( savedInstanceState );
+        setRetainInstance(true);
         setHasOptionsMenu(true);
         //if (getArguments() != null) {}
     }
@@ -228,6 +229,7 @@ implements  TCPListener,
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        menu_clearChat.setVisible(false);
         //Log.d(LOG_TAG, "onDeath FragmentTCP_IP");
         menu_clearChat.setVisible(false);//скрываем кнопку удаления чата
         DisconnectToServer();
@@ -447,8 +449,12 @@ implements  TCPListener,
     //###################################################################################################
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+       /* menu_clearChat = menu.findItem(R.id.clearChat);
+        menu_switch_btn = menu.findItem(R.id.action_Connect_Disconnect_TCP_IP);*/
         menu_clearChat = menu.findItem(R.id.clearChat);
+        menu_clearChat.setVisible(true);
         menu_switch_btn = menu.findItem(R.id.action_Connect_Disconnect_TCP_IP);
+        menu_switch_btn.setVisible(true);
         super.onCreateOptionsMenu(menu, inflater);
     }
     @SuppressLint("NonConstantResourceId")

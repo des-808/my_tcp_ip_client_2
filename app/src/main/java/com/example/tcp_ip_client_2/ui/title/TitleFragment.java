@@ -5,6 +5,9 @@ package com.example.tcp_ip_client_2.ui.title;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static com.example.tcp_ip_client_2.MainActivity.menu_clearChat;
+import static com.example.tcp_ip_client_2.MainActivity.menu_switch_btn;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,6 +18,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,12 +108,15 @@ public class TitleFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
         super.onCreate( savedInstanceState );
+        setRetainInstance(true);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         //сработает когда запустится фрагмент fragment_title
+
         refreshTitleList();//перезагружает список
         registerForContextMenu( newlist ); //если  раньше запускать будет ошибка. фрагменты не мгновенно запускаются
     }
@@ -140,7 +148,16 @@ public class TitleFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
         binding = null;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        //menu_switch_btn.setVisible(false);
+        ONListViewFragmentTitle = null;
+        OnStartFragmentTcpIp = null;
     }
 
     @Override
@@ -179,9 +196,9 @@ public class TitleFragment extends Fragment {
             case MENU_DELETE:
                 openDeleteDialog( items );
                 break;
-            case MENU_SEARCH_PORT:
-               openSearchPortDialog(items);
-                break;
+            /*case MENU_SEARCH_PORT:
+              // openSearchPortDialog(items);
+                break;*/
             //case MENU_CANCEL:break;
             default:
                 break;
@@ -194,7 +211,7 @@ public class TitleFragment extends Fragment {
         super.onCreateContextMenu( menu, v, menuInfo );
         menu.add( 0, MENU_RENAME, 0, "Редактировать" );
         menu.add( 0, MENU_DELETE, 0, "Удалить" );
-        menu.add( 0, MENU_SEARCH_PORT, 0, "Поиск открытого порта" );
+       // menu.add( 0, MENU_SEARCH_PORT, 0, "Поиск открытого порта" );
         //menu.add( 0, MENU_CANCEL, 0, "Отмена" );
     }
 
@@ -217,7 +234,7 @@ public class TitleFragment extends Fragment {
                     }
                     try {
                         Socket socket = new Socket(item.getIp_adr(), Integer.parseInt(item.getPort()));
-                        socket.setSoTimeout(70);
+                        socket.setSoTimeout(170);
                         //System.out.println("Port is available");
                         socket.close();
                         item.setPortOnline(true);
@@ -329,74 +346,17 @@ public class TitleFragment extends Fragment {
         editor.putString(EnumsAndStatics.SERVER_PORT_PREF, port);
         editor.apply();
         Navigation.findNavController(root).navigate(R.id.nav_tcp_ip);
-        //onStartFragmentTCP_IP();
     }
 
-    public void openSearchPortDialog(final TitleChatsItems item) {
-        LayoutInflater dlgInfater = (LayoutInflater) (getActivity() != null ? getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) : null);
-        View root = dlgInfater != null ? dlgInfater.inflate(R.layout.search_port, null) : null;
-        final ListView ports = root != null ? root.findViewById(R.id.table_search_ports_list) : null;
-        ArrayList<SearchPortItems> portsList = new ArrayList<>();
 
-        /*Objects.requireNonNull(name_).setText( item.getName() );
-        ipadr_.setText( item.getIp_adr() );
-        port_.setText( item.getPort() );*/
-
-        AlertDialog.Builder builder = new AlertDialog.Builder( getActivity() );
-        builder.setView( root );
-        builder.setMessage( "Список открытых портов\n для ip "+item.getIp_adr() );
-
-        portsList = refreshPortOnlineList(item.getIp_adr());
-        builder.setNegativeButton( "Ok", (dialog, id) -> dialog.cancel());
-
-        SearchPortAdapter S_Adapter = new SearchPortAdapter(getActivity() != null ? getActivity() : null, portsList );
-        //ListView searchPort=Objects.requireNonNull(getView()).findViewById( R.id.table_search_ports );
-        ports.setAdapter( S_Adapter );
-        builder.setCancelable( false );
-        builder.create();
-        refreshPortOnlineList(item.getIp_adr());
-        builder.show();
-        S_Adapter.notifyDataSetChanged();
-
-
-    }
-
-    @SuppressLint("UseRequireInsteadOfGet")
-    private ArrayList<SearchPortItems> refreshPortOnlineList(String ip_adr) {
-        ArrayList<SearchPortItems> list = new ArrayList<>();
-        ExecutorService executor = Executors.newFixedThreadPool(100);
-        final SearchPortItems[] item = new SearchPortItems[100];
-        for (int i = 1; i <= 65535; i++) {
-
-            int finalI = i;
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Socket socket = new Socket(ip_adr, finalI);
-                        socket.setSoTimeout(100);
-                        System.out.println("Port is available "+finalI);
-                        socket.close();
-                        item[0] = new SearchPortItems();
-                        item[0].setPort(String.valueOf(finalI));
-                        item[0].setPortOnline(true);
-                        list.add(item[0]);
-                    } catch (IOException e) {
-                        System.out.println("Port is not available->"+finalI);
-                    }
-                    catch (NullPointerException e){e.printStackTrace();}
-
-                }
-            });
-        }
-        executor.shutdown();
-        try {
-            boolean b = executor.awaitTermination(40000, TimeUnit.MILLISECONDS); //ожидание завершения
-            // executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return list;
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu_clearChat = menu.findItem(R.id.clearChat);
+        menu_switch_btn = menu.findItem(R.id.action_Connect_Disconnect_TCP_IP);
+        //menu_clearChat = menu.findItem(R.id.clearChat);
+        //menu_clearChat.setVisible(true);
+        menu_switch_btn.setVisible(true);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
 }

@@ -1,5 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="reply_entries">xxx</string-array>
-    <string-array name="reply_values">xxx</string-array>
+
+    <string-array name="reply_entries">
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="reply_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="BoudRate_entries">
+        <item>600</item>
+        <item>1200</item>
+        <item>2400</item>
+        <item>4800</item>
+        <item>9600</item>
+        <item>19200</item>
+        <item>38400</item>
+        <item>56000</item>
+        <item>57600</item>
+        <item>115200</item>
+        <item>256000</item>
+        <item>Custom: 123456</item>
+    </string-array>
+    <string-array name="BoudRate_values">
+        <item>600</item>
+        <item>1200</item>
+        <item>2400</item>
+        <item>4800</item>
+        <item>9600</item>
+        <item>19200</item>
+        <item>38400</item>
+        <item>56000</item>
+        <item>57600</item>
+        <item>115200</item>
+        <item>256000</item>
+        <item>123456</item>
+    </string-array>
+    <string-array name="DataBits_entries">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="DataBits_values">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="Parity_entries">
+        <item>None</item>
+        <item>Odd</item>
+        <item>Even</item>
+    </string-array>
+    <string-array name="Parity_values">
+        <item>None</item>
+        <item>Odd</item>
+        <item>Even</item>
+    </string-array>
+    <string-array name="StopBits_entries">
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="StopBits_values">
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="FlowControl_entries">
+        <item>None</item>
+        <item>RTS/CTS</item>
+        <item>DTR/DSR</item>
+        <item>XON/XOFF</item>
+    </string-array>
+    <string-array name="FlowControl_values">
+        <item>None</item>
+        <item>RTS/CTS</item>
+        <item>DTR/DSR</item>
+        <item>XON/XOFF</item>
+    </string-array>
+
+    <string-array name="FontSize_entries">
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+        <item>20</item>
+        <item>22</item>
+        <item>24</item>
+        <item>26</item>
+        <item>28</item>
+        <item>30</item>
+    </string-array>
+    <string-array name="FontSize_values">
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+        <item>20</item>
+        <item>22</item>
+        <item>24</item>
+        <item>26</item>
+        <item>28</item>
+        <item>30</item>
+    </string-array>
+    <string-array name="FontStyle_entries">
+        <item>Normal</item>
+        <item>Monospace</item>
+    </string-array>
+    <string-array name="FontStyle_values">
+        <item>Normal</item>
+        <item>Monospace</item>
+    </string-array>
+    <string-array name="Charset_entries">
+        <item>Normal</item>
+        <item>Monospace</item>
+    </string-array>
+    <string-array name="Charset_values">
+        <item>Normal</item>
+        <item>Monospace</item>
+    </string-array>
+    <string-array name="DisplayMode_entries">
+        <item>Text</item>
+        <item>Chat</item>
+        <item>Terminal</item>
+        <item>HEX</item>
+    </string-array>
+    <string-array name="DisplayMode_values">
+        <item>Text</item>
+        <item>Chat</item>
+        <item>Terminal</item>
+        <item>HEX</item>
+    </string-array>
+
+    <string-array name="TimestampFormat_values">
+        <item>Date</item>
+        <item>Time</item>
+        <item>Milliseconds</item>
+    </string-array>
+    <string-array name="TimestampFormat_entries">
+        <item>Date</item>
+        <item>Time</item>
+        <item>Milliseconds</item>
+    </string-array>
+
+    <string-array name="BufferSize_entries">
+        <item>2 kB</item>
+        <item>10 kB</item>
+        <item>50 kB</item>
+        <item>200 kB</item>
+        <item>Unlimited</item>
+    </string-array>
+    <string-array name="BufferSize_values">
+        <item>2 kB</item>
+        <item>10 kB</item>
+        <item>50 kB</item>
+        <item>200 kB</item>
+        <item>Unlimited</item>
+    </string-array>
+
+    <string-array name="NewLineReceive_entries">
+        <item>CR+LF</item>
+        <item>CR</item>
+        <item>LF</item>
+        <item>STX/ETX</item>
+        <item>Nul</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="NewLineReceive_values">
+        <item>CR+LF</item>
+        <item>CR</item>
+        <item>LF</item>
+        <item>STX/ETX</item>
+        <item>Nul</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="NewLineSend_entries">
+        <item>auto</item>
+        <item>CR+LF</item>
+        <item>CR</item>
+        <item>LF</item>
+        <item>STX/ETX</item>
+        <item>Nul</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="NewLineSend_values">
+        <item>Auto (same as Receive)</item>
+        <item>CR+LF</item>
+        <item>CR</item>
+        <item>LF</item>
+        <item>STX/ETX</item>
+        <item>Nul</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="EditMode_entries">
+        <item>Text</item>
+        <item>HEX</item>
+    </string-array>
+    <string-array name="EditMode_values">
+        <item>Text</item>
+        <item>HEX</item>
+    </string-array>
+
+
 </resources>

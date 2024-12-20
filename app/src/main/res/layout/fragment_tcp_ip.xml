@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/backGroundMyApp"
+
     android:orientation="vertical"
     tools:context=".ui.title.tcp_ip.TCP_IP_Fragment"
     >
-
+   <!-- android:background="@color/backGroundMyApp"-->
     <TextView
         android:id="@+id/connect_text"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@android:color/background_dark"
+
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.Compat.Notification.Title"
@@ -26,18 +26,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/list_messages"
          />
-
+    <!--android:background="@android:color/background_dark"-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_messages"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/collorDark"
+
         app:layout_constraintBottom_toTopOf="@id/containerFrameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/connect_text"
         app:layout_constraintVertical_weight="10" />
+    <!--android:background="@color/collorDark"-->
 <FrameLayout
     android:id="@+id/containerFrameLayout"
     android:layout_width="match_parent"
