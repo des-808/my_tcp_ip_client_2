@@ -12,7 +12,7 @@ public class ChatModel {
     private boolean outgoing; // true = outgoing, false = incoming
     private boolean clicked=false;
 
-    public ChatModel() {    }
+    public ChatModel() { }
 
     public ChatModel(boolean outgoing) {
         this.outgoing = outgoing;

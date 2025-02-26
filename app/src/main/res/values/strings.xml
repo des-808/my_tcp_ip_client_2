@@ -6,11 +6,14 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Home page</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_usb">USB</string>
-    <string name="app_name">TCP IP Client</string>
-    <string name="serverlist">Server List</string>
+    <string name="app_name">Serial Tool Kit</string>
+    <string name="menu_serverlist">Server List</string>
+    <string name="menu_devices">Devices</string>
+    <string name="menu_bluetooth">Bluetooth</string>
+    <string name="title">Tcp Ip</string>
     <string name="add">ADD</string>
     <string name="ip_adress">IP Address</string>
     <string name="name">Name</string>
@@ -80,7 +83,7 @@
     <string name="ClearChat">Очистить чат</string>
     <string name="oProgramme">О программе</string>
     <string name="disconnected">Disconnected</string>
-    <string name="title">Title</string>
+
     <string name="please_wait">Please wait...</string>
     <string name="connecting">Connecting</string>
     <string name="_10003">10003</string>
@@ -95,6 +98,77 @@
     <string name="wednesday">Wednesday</string>
     <string name="obshie_nastroiyki">Общие настройки</string>
     <string name="BREAK_duration">Length of BREAK signal [ms]</string>
+    <string name="area_input_text">Поле ввода текста</string>
+    <string name="btn_send_text">Кнопка отправки текста</string>
 
+
+
+
+    <string name="_0123456789123456"> </string>
+    <string name="textviewqqqq">TextView</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="end">end</string>
+    <string name="dom_1">дом 1</string>
+    <string name="zones">зоны</string>
+    <string name="telephone">телефон</string>
+    <string name="services">сервис</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="next">next</string>
+    <string name="dom_2">дом 2</string>
+    <string name="clock">часы</string>
+    <string name="kodes">коды</string>
+    <string name="test">тест</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="back">back</string>
+    <string name="zvezdochka">*</string>
+    <string name="_0">0</string>
+    <string name="reshotka">#</string>
+    <string name="enter">enter</string>
+
+    <!-- Options Menu -->
+    <string name="connect_to_scan">Сканировать и подключиться</string>
+    <string name="scan_device">Сканировать новые устройства</string>
+    <string name="exit_finish">Выйти</string>
+
+    <string name="bt_connection_lost">connection lost</string>
+    <string name="bt_unable">bt unable</string>
+    <string name="title_paired_devices">Сохранённые устройства</string>
+    <string name="title_other_devices">Найденные устройства</string>
+    <string name="button_scan">Сканировать</string>
+
+    <string name="select_device">Поиск устройств</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="none_paired">нет сохранённых пар</string>
+    <string name="new_device">новый девайс</string>
+    <string name="scanning">сканирование</string>
+    <string name="none_found">Новых или видимых устройств не найдено</string>
+    <string name="stop_search">stop search</string>
+    <string name="start_search">start search</string>
+    <string name="title_connected_to">connected</string>
+    <string name="title_connecting">connecting</string>
+    <string name="title_not_connected">no connect</string>
+    <string name="title_activity_device_list">DeviceListActivity</string>
+    <string name="not_connected">not connected</string>
+    <string name="stop_connect">Disconnect to socet</string>
+    <string name="lin">LIN</string>
+    <string name="nord_tm">NORD</string>
+    <string name="bt">bt</string>
+    <string name="serial">serial</string>
+    <string name="row_online">N</string>
+    <string name="select_connecd_device">Соеденить с</string>
+    <string name="hex">hex</string>
+    <string name="string">string</string>
+    <string name="avariya">авария</string>
+    <string name="keyboard">Keyboard</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="searchAddrId">Поиск адреса устройства</string>
+    <string name="NonFixAlarm">БЕЗ ФИКСАЦИИ ТРЕВОГИ</string>
 
 </resources>

@@ -196,30 +196,28 @@ public class InitTCPClientTask extends AsyncTask<Void, Void, Void>
 			char[] charBuffer = new char[length];
 			for(TCPListener listener:allListeners) listener.onTCPConnectionStatusChanged(true);
 
-			do {
-				int count = in.read(charBuffer, 0, length);
-				int index = 0;
-				if (count >= 0) {
-					do {
-						if(charBuffer[index] != '\n' && charBuffer[index] != 0x0D && charBuffer[index] < 32){
-						//if ((charBuffer[index]) != '\n' && (charBuffer[index]) != 0x0D && (charBuffer[index] >= 0 && (charBuffer[index]) < 32)) {
-							inMsg.append(DecimalToHex.toHex(charBuffer[index]));
-						} else {
-							inMsg.append((charBuffer[index]));
-						}
-						index++;
-					} while (count != index);
-					for (TCPListener listener : allListeners)
-					{
-						listener.onTCPMessageRecieved(String.valueOf((inMsg)));//
+            while (true) {
+                int count = in.read(charBuffer, 0, length);
+                int index = 0;
+                if (count >= 0) {
+                    do {
+                        if (charBuffer[index] != '\n' && charBuffer[index] != 0x0D && charBuffer[index] < 32) {
+                            //if ((charBuffer[index]) != '\n' && (charBuffer[index]) != 0x0D && (charBuffer[index] >= 0 && (charBuffer[index]) < 32)) {
+                            inMsg.append(DecimalToHex.toHex(charBuffer[index]));
+                        } else {
+                            inMsg.append((charBuffer[index]));
+                        }
+                        index++;
+                    } while (count != index);
+                    for (TCPListener listener : allListeners) {
+                        listener.onTCPMessageRecieved(String.valueOf((inMsg)));//
                     }
 					/*for (TCPListener listener : allListeners)
 						listener.onTCPMessageRecieved(new String(charBuffer, 0, count, StandardCharsets.UTF_8 ));*/
-					Log.d("TcpClientInputMessage", "sent: " + inMsg);
-					inMsg.delete(0, count); // обнуляем буфер
-					//count = -1;// обнуляем счетчик
-				}
-			} while (true);
+                    Log.d("TcpClientInputMessage", "sent: " + inMsg);
+                    inMsg.delete(0, count); // обнуляем буфер
+                }
+            }
 		}
 		catch (UnknownHostException e) 		{e.printStackTrace();}
 		catch (IOException e) 				{e.printStackTrace();}

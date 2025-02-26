@@ -1,6 +1,6 @@
 package com.example.tcp_ip_client_2.classs;
 
-public class Adress {
+public class ServerAdress {
     private static  String name;
     private static  String ip;
     private static  String port;
@@ -17,7 +17,7 @@ public class Adress {
 
 
     public static  void setPort(String port) {
-        Adress.port = port;
+        ServerAdress.port = port;
     }
 
     public static  String getIp() {
@@ -25,7 +25,7 @@ public class Adress {
     }
 
     public static  void setIp(String ip) {
-        Adress.ip = ip;
+        ServerAdress.ip = ip;
     }
 
     public static  String getName() {
@@ -33,12 +33,14 @@ public class Adress {
     }
 
     public static  void setName(String name) {
-        Adress.name = name;
+        ServerAdress.name = name;
     }
 
-    public   Adress(String name, String ip, String port) {
-        Adress.name = name;
-        Adress.ip = ip;
-        Adress.port = port;
+    public ServerAdress(String name, String ip, String port) {
+        ServerAdress.name = name;
+        ServerAdress.ip = ip;
+        ServerAdress.port = port;
     }
+
+
 }

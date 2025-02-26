@@ -9,8 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.tcp_ip_client_2.MainActivity;
-import com.example.tcp_ip_client_2.ui.home.HomeFragment;
+import com.example.tcp_ip_client_2.ui.home_page.HomeFragment;
 
 
 @SuppressLint("ValidFragment")
@@ -23,7 +22,7 @@ public class fragment_exit extends DialogFragment {
         setArguments( args );
     }
 
-    @NonNull
+   /* @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         String title = getArguments().getString( "title" );
@@ -38,7 +37,7 @@ public class fragment_exit extends DialogFragment {
 
 
 
-        /*return new AlertDialog.Builder( getActivity() )
+        *//*return new AlertDialog.Builder( getActivity() )
                 //.setIcon( R.drawable.android3d)
                 .setTitle( title )
                 .setPositiveButton( "OK", (dialog, whichButton) -> {
@@ -46,8 +45,12 @@ public class fragment_exit extends DialogFragment {
                 })
                 .setNegativeButton( "Cancel", (dialog, whichButton) -> {
                     ((MainActivity) getActivity()).doNegativeClick();
-                }).create();*/
-    }
+                }).create();*//*
+    }*/
+
+
+   /* public void doPositiveClick() {*//*finish();*//*}
+    public void doNegativeClick() {}*/
     }
 
 

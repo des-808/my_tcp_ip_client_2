@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:plus="http://schemas.android.com/apk/lib/com.google.android.gms.plus"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical"
+    android:visibility="visible"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.bluetooth.KeyboardFragment">
+
+    <TextView
+        android:id="@+id/keyboardStr1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:text="@string/_0123456789123456"
+        android:textAlignment="center"
+        android:textColor="#15E927"
+        android:textSize="46sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/keyboardStr2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:text="@string/_0123456789123456"
+        android:textAlignment="center"
+        android:textColor="#15E927"
+        android:textSize="46sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/keyboardStr3"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:background="@android:color/black"
+        android:text="@string/_0123456789123456"
+        android:textAlignment="center"
+        android:textColor="#15E927"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/securityLed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="0"
+            android:contentDescription="security"
+            app:srcCompat="@android:drawable/presence_invisible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="   охрана  "
+            android:textColor="#4CAF50"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/alertLed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="alert"
+            android:paddingStart="10dp"
+            app:srcCompat="@android:drawable/presence_invisible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="   авария   "
+            android:textColor="#4CAF50"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="0dp"
+            android:visibility="visible">
+
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center"
+                android:text="охр.снят"
+                android:textColor="#4CAF50"
+                android:textSize="18sp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="память"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="искл"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="отмена"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="4dp">
+
+            <Button
+                android:id="@+id/btn_1"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/_1"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_2"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FBF8F8"
+                android:padding="4dp"
+                android:text="@string/_2"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_3"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/_3"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_end"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/end"
+                android:textSize="28sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="0dp">
+
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center"
+                android:text="@string/dom_1"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="@string/zones"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="@string/telephone"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="@string/services"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="4dp">
+
+            <Button
+                android:id="@+id/btn_4"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_4"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_5"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_5"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_6"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_6"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_next"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/next"
+                android:textSize="28sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="0dp">
+
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center"
+                android:text="@string/dom_2"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="@string/clock"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="@string/kodes"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="@string/test"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="4dp">
+
+            <Button
+                android:id="@+id/btn_7"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_7"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_8"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_8"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_9"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_9"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_back"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back"
+                android:textSize="28sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="0dp">
+
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center"
+                android:text="зв.сигнал"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="авто пост."
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="сброс"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|center"
+                android:text="ввод"
+                android:textColor="#4CAF50"
+                android:textSize="18sp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:padding="4dp">
+
+            <Button
+                android:id="@+id/btn_zv"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/zvezdochka"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_0"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/_0"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_resh"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/reshotka"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/btn_enter"
+                style="@android:style/Widget.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/enter"
+                android:textSize="28sp" />
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>

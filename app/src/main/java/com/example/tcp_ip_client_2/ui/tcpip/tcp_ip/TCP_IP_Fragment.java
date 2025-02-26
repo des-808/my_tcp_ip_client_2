@@ -1,8 +1,6 @@
-package com.example.tcp_ip_client_2.ui.title.tcp_ip;
+package com.example.tcp_ip_client_2.ui.tcpip.tcp_ip;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.tcp_ip_client_2.MainActivity.menu_clearChat;
-import static com.example.tcp_ip_client_2.MainActivity.menu_switch_btn;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -30,16 +28,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tcp_ip_client_2.R;
 import com.example.tcp_ip_client_2.TCPCommunicator;
 import com.example.tcp_ip_client_2.adapter.ChatMessageAdapter;
-import com.example.tcp_ip_client_2.classs.Adress;
+import com.example.tcp_ip_client_2.classs.ServerAdress;
 import com.example.tcp_ip_client_2.classs.ChatModel;
 import com.example.tcp_ip_client_2.classs.MessageTime;
 import com.example.tcp_ip_client_2.databinding.FragmentTcpIpBinding;
@@ -47,7 +43,6 @@ import com.example.tcp_ip_client_2.db.DBChatAdapter;
 import com.example.tcp_ip_client_2.db.DBChatHelper;
 import com.example.tcp_ip_client_2.interfaces.TCPListener;
 import com.example.tcp_ip_client_2.interfaces.onFragment_TCP_IP_Init;
-import com.example.tcp_ip_client_2.interfaces.onStartFragmentTcpIp;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -61,7 +56,7 @@ implements  TCPListener,
     private onFragment_TCP_IP_Init mFragmentTCPIPInit;
     //View view;
     private static final String PREFS_FILE = "com.example.tcp_ip_client_2_preferences";
-    private static final String KEY_ANDROMEDA = "switch_andromeda";
+    private static final String KEY_ANDROMEDA = "EditMode";
     private static final int PREFS_MODE = MODE_PRIVATE;//Context.MODE_PRIVATE;
     private static final String FRAGMENT_NAME = "TCP_IP_Fragment";
    // SharedPreferences sharedPreferencesMain;
@@ -96,6 +91,10 @@ implements  TCPListener,
    // public MenuItem menu_switch_btn;
     //public MenuItem menu_clearChat = menu.findItem(R.id.clearChat);
 
+    public MenuItem menu_switch_btn_;
+    public MenuItem menu_clearChat_;
+
+
     public EditText object,clas,razd,schs;
     public ImageButton btnSend_tx;
     SharedPreferences settings;
@@ -129,7 +128,7 @@ implements  TCPListener,
     public void onCreate(@Nullable Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
         super.onCreate( savedInstanceState );
-        setRetainInstance(true);
+        //setRetainInstance(true);
         setHasOptionsMenu(true);
         //if (getArguments() != null) {}
     }
@@ -181,7 +180,7 @@ implements  TCPListener,
     @Override
     public void on_FragmentTCP_IP_Init() {
         //сработает когда запустится фрагмент fragment_tcp_ip
-        String xparam = Adress.getName() +"  |  "+ Adress.getIp() + ":" + Adress.getPort();
+        String xparam = ServerAdress.getName() +"  |  "+ ServerAdress.getIp() + ":" + ServerAdress.getPort();
         TextView x = getActivity().findViewById( R.id.connect_text );
         x.setText( xparam );
         object = getActivity().findViewById(R.id.editObjekt);
@@ -194,7 +193,7 @@ implements  TCPListener,
         clearRecyclerView();
         tcpIpViewModel.addChatMessages(chatsList);
         tcpIpViewModel.addChatMessages(db_chat_Adapter.getMessages());//добавляем сообщения из БД в список
-        if(menu_clearChat!=null)menu_clearChat.setVisible(true);
+        if(menu_clearChat_ !=null) menu_clearChat_.setVisible(true);
         ConnectToServer();
         if (!db_chat_Adapter.getMessages().isEmpty()) {
             //chatsList.addAll(db_chat_Adapter.getMessages());
@@ -229,9 +228,9 @@ implements  TCPListener,
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        menu_clearChat.setVisible(false);
+        menu_clearChat_.setVisible(false);
         //Log.d(LOG_TAG, "onDeath FragmentTCP_IP");
-        menu_clearChat.setVisible(false);//скрываем кнопку удаления чата
+        menu_clearChat_.setVisible(false);//скрываем кнопку удаления чата
         DisconnectToServer();
     }
 
@@ -243,37 +242,18 @@ implements  TCPListener,
      * создаём или добавляем таблицу в базу
      * */
     public void ConnectToTable(){
-        DBChatHelper.setTableName(Adress.getName());
+        DBChatHelper.setTableName(ServerAdress.getName());
         db_chat_Adapter.createTableIfNotExists();
     }
 
-    @Override
-    public void onTCPConnectionStatusChanged(boolean isConnectedNow) {
-        if(isConnectedNow)
-        {
-            getActivity().runOnUiThread(() -> {
-                dialog.hide();
-                    connectToServer = true;
-                    menu_switch_btn.setIcon(R.drawable.ic_podkl);
-            });
-        }
-    }
+
 
     @Override
     public void onTCPMessageRecievedInt(Integer inMsgInt) {}
     @Override
     public void onTCPMessageRecievedChar(char inMsgChar) {}
     @Override
-    public void onTCPMessageRecievedCharBuffer(char[] inMsgCharBuffer, int count, int len) {}
-
-    private void DisconnectToServer(){
-        if(TCPCommunicator.getInstance()!= null){
-            TCPCommunicator.closeStreams();
-            TCPCommunicator.removeAllListeners();
-            connectToServer = false;
-            menu_switch_btn.setIcon(R.drawable.ic_otkl);
-        }
-    }
+    public void onTCPMessageRecievedByteBuffer(char[] inMsgByteBuffer, int count, int len) {}
 
     @Override
     public void onTCPMessageRecieved(String message) {
@@ -292,18 +272,26 @@ implements  TCPListener,
     }
 
     public void chatMessageOrChatAndromedaLayout(){
-        View newView;
+        View newView = null;
         ViewGroup fragmentLayout = (ViewGroup) getView().findViewById(R.id.fragmentLayout);
         ViewGroup.LayoutParams params = root.getLayoutParams();
         fragmentLayout.removeAllViews();
         // Проверяем, существует ли ключ KEY_ANDROMEDA в файле PREFS_FILE
         if (settings.contains(KEY_ANDROMEDA)) {
             // Если ключ существует
-            Log.d(LOG_TAG, MessageFormat.format("{0}.{1} -> {2}", FRAGMENT_NAME, KEY_ANDROMEDA, settings.getBoolean(KEY_ANDROMEDA, false)));
-            if(settings.getBoolean(KEY_ANDROMEDA,false) ){
-                newView = getLayoutInflater().inflate(R.layout.row_andromeda_send, null);
-            }else {//false режим текста
+            Log.d(LOG_TAG, MessageFormat.format("{0}.{1} -> {2}", FRAGMENT_NAME, KEY_ANDROMEDA, settings.getString(KEY_ANDROMEDA, "text")));
+            String EditMode = settings.getString(KEY_ANDROMEDA, "text");
+            if(EditMode.equals("text") )
+            {// режим текст
                 newView = getLayoutInflater().inflate(R.layout.row_chat_send, null);
+            }
+            else if(EditMode.equals("hex") )
+            {// режим hex
+                newView = getLayoutInflater().inflate(R.layout.row_chat_send, null);
+            }
+            else if(EditMode.equals("andromeda") )
+            {// режим андромеда
+                newView = getLayoutInflater().inflate(R.layout.row_andromeda_send, null);
             }
         } else {
             newView = getLayoutInflater().inflate(R.layout.row_andromeda_send, null);
@@ -335,18 +323,7 @@ implements  TCPListener,
         refreshChatListView();
     }*/
 
-    private void ConnectToServer() {
-        if(!connectToServer) {
-            setupDialog();
-            TCPCommunicator tcpClient = TCPCommunicator.getInstance();
-            TCPCommunicator.addListener( this );
-            if ( tcpClient.init(
-                    Adress.getIp(),
-                    Adress.getPortParseInt())== TCPCommunicator.TCPWriterErrors.UnknownHostException ) {
-                DisconnectToServer();
-            }
-        }
-    }
+
 
     private void setupDialog() {//в место устаревшего ProgressDialog
         LinearLayout layout = new LinearLayout(getActivity());
@@ -449,14 +426,54 @@ implements  TCPListener,
     //###################################################################################################
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-       /* menu_clearChat = menu.findItem(R.id.clearChat);
-        menu_switch_btn = menu.findItem(R.id.action_Connect_Disconnect_TCP_IP);*/
-        menu_clearChat = menu.findItem(R.id.clearChat);
-        menu_clearChat.setVisible(true);
-        menu_switch_btn = menu.findItem(R.id.action_Connect_Disconnect_TCP_IP);
-        menu_switch_btn.setVisible(true);
         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_tcp_ip, menu);
+        menu_clearChat_ = menu.findItem(R.id.clearChat);
+        menu_switch_btn_ = menu.findItem(R.id.action_Connect_Disconnect_TCP_IP);
     }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+    }
+
+
+    @Override
+    public void onTCPConnectionStatusChanged(boolean isConnectedNow) {
+        if(isConnectedNow)
+        {
+            getActivity().runOnUiThread(() -> {
+                dialog.hide();
+                connectToServer = true;
+                //invalidateOptionsMenu();
+                menu_switch_btn_.setIcon(R.drawable.ic_podkl);
+            });
+        }
+    }
+
+    private void ConnectToServer() {
+        if(!connectToServer) {
+            setupDialog();
+            TCPCommunicator tcpClient = TCPCommunicator.getInstance();
+            TCPCommunicator.addListener( this );
+            if ( tcpClient.init(
+                    ServerAdress.getIp(),
+                    ServerAdress.getPortParseInt())== TCPCommunicator.TCPWriterErrors.UnknownHostException ) {
+                DisconnectToServer();
+            }
+        }
+    }
+
+    private void DisconnectToServer(){
+        if(TCPCommunicator.getInstance()!= null){
+            TCPCommunicator.closeStreams();
+            TCPCommunicator.removeAllListeners();
+            connectToServer = false;
+            menu_switch_btn_.setIcon(R.drawable.ic_otkl);
+        }
+    }
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

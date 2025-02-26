@@ -9,15 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tcp_ip_client_2.R;
-import com.example.tcp_ip_client_2.classs.TitleChatsItems;
+import com.example.tcp_ip_client_2.classs.ServerListItem;
 
 import java.util.ArrayList;
 
-public class ChatsTitleAdapter extends BaseAdapter {
+public class ServerListAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private static ArrayList<TitleChatsItems>data;
+    private static ArrayList<ServerListItem>data;
 
-    public ChatsTitleAdapter(Context context, ArrayList<TitleChatsItems>data){
+    public ServerListAdapter(Context context, ArrayList<ServerListItem>data){
         inflater = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
         this.data = data;
     }
@@ -26,10 +26,10 @@ public class ChatsTitleAdapter extends BaseAdapter {
     public int getCount(){ return data.size(); }
 
     @Override
-    public TitleChatsItems getItem(int position){ return data.get(position); }
+    public ServerListItem getItem(int position){ return data.get(position); }
 
     //@Override
-    public static TitleChatsItems getItemPosition(int position){ return data.get(position); }
+    public static ServerListItem getItemPosition(int position){ return data.get(position); }
 
     @Override
     public long getItemId(int position){return 0;}
@@ -40,7 +40,7 @@ public class ChatsTitleAdapter extends BaseAdapter {
         if (convertView == null) {
             view = inflater.inflate( R.layout.row_listview, null );
         }
-        final TitleChatsItems item = data.get( position );
+        final ServerListItem item = data.get( position );
 
         ImageView connect_port_image = (ImageView) view.findViewById( (R.id.connect_port_image) );
         connect_port_image.setImageResource( R.drawable.yellow_dot7x7 );

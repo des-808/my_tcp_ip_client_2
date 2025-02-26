@@ -8,5 +8,5 @@ public interface TCPListener {
    public void onTCPMessageRecievedChar(char inMsgChar);
 
 
-    void onTCPMessageRecievedCharBuffer(char[] inMsgCharBuffer, int count, int len);
+    void onTCPMessageRecievedByteBuffer(char[] inMsgByteBuffer, int count, int len);
 }

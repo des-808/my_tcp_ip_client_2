@@ -18,13 +18,17 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_gallery" />
         <item
-            android:id="@+id/nav_usb"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_usb_device"
+            android:icon="@android:drawable/stat_notify_sync"
             android:title="@string/menu_usb" />
         <item
+            android:id="@+id/nav_bluetooth"
+            android:icon="@android:drawable/stat_sys_data_bluetooth"
+            android:title="@string/menu_bluetooth" />
+        <!--<item
             android:id="@+id/nav_preference"
             android:icon="@drawable/icon_setting"
-            android:title="@string/Settings" />
+            android:title="@string/Settings" />-->
 
         <item
             android:id="@+id/nav_search_ports"
@@ -33,8 +37,14 @@
 
         <item
             android:id="@+id/nav_settings"
-            android:icon="@android:drawable/ic_menu_manage"
-            android:title="@string/obshie_nastroiyki" />
+            android:icon="@drawable/icon_setting"
+            android:title="@string/Settings" />
+
+        <item
+            android:id="@+id/nav_mipIFragment"
+            android:icon="@drawable/yellow_dot7x7"
+            android:title="MipI" />
+        <!--android:icon="@android:drawable/ic_menu_manage"-->
 
     </group>
 </menu>

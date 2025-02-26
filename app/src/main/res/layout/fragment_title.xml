@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.title.TitleFragment"
+    tools:context=".ui.tcpip.TitleFragment"
     >
     <!--android:background="@color/backGroundMyApp"-->
 <TextView

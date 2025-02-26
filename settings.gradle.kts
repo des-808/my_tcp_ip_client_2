@@ -8,6 +8,7 @@ pluginManagement {
             }
         }
         mavenCentral()
+        maven(url = "https://jitpack.io")
         gradlePluginPortal()
     }
 }
@@ -16,9 +17,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-            //maven { url 'https://jitpack.io' }
+        maven(url = "https://jitpack.io")
     }
 }
 
 rootProject.name = "tcp_ip_client_2"
+/*include 'usbSerialForAndroid', 'usbSerialExamples'*/
 include(":app")

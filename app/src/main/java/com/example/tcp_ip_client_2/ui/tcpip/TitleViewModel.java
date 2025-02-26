@@ -1,13 +1,12 @@
-package com.example.tcp_ip_client_2.ui.title;
+package com.example.tcp_ip_client_2.ui.tcpip;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.tcp_ip_client_2.classs.TitleChatsItems;
+import com.example.tcp_ip_client_2.classs.ServerListItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TitleViewModel extends ViewModel {
@@ -15,20 +14,20 @@ public class TitleViewModel extends ViewModel {
 
 
     private MutableLiveData<String> mText;
-    private MutableLiveData<ArrayList<TitleChatsItems>> mListView = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<ServerListItem>> mListView = new MutableLiveData<>();
 
-    /*public TitleViewModel(MutableLiveData<String> mText, MutableLiveData<ArrayList<TitleChatsItems>> mListView) {
+    /*public TitleViewModel(MutableLiveData<String> mText, MutableLiveData<ArrayList<ServerListItem>> mListView) {
         this.mText = mText;
         this.mListView = mListView;
     }*/
 
 
 
-    public MutableLiveData<ArrayList<TitleChatsItems>> getmListView() {
+    public MutableLiveData<ArrayList<ServerListItem>> getmListView() {
         return mListView;
     }
 
-    public void setmListView(MutableLiveData<ArrayList<TitleChatsItems>> mListView) {
+    public void setmListView(MutableLiveData<ArrayList<ServerListItem>> mListView) {
         this.mListView = mListView;
     }
 

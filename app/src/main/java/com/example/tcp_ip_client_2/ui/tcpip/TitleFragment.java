@@ -1,21 +1,12 @@
-package com.example.tcp_ip_client_2.ui.title;
-
-
-
+package com.example.tcp_ip_client_2.ui.tcpip;
 
 import static android.content.Context.MODE_PRIVATE;
-
-import static com.example.tcp_ip_client_2.MainActivity.menu_clearChat;
-import static com.example.tcp_ip_client_2.MainActivity.menu_switch_btn;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,26 +15,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.tcp_ip_client_2.R;
-import com.example.tcp_ip_client_2.adapter.ChatsTitleAdapter;
-import com.example.tcp_ip_client_2.adapter.SearchPortAdapter;
-import com.example.tcp_ip_client_2.classs.Adress;
-import com.example.tcp_ip_client_2.classs.SearchPortItems;
-import com.example.tcp_ip_client_2.classs.TitleChatsItems;
+import com.example.tcp_ip_client_2.adapter.ServerListAdapter;
+import com.example.tcp_ip_client_2.classs.ServerAdress;
+import com.example.tcp_ip_client_2.classs.ServerListItem;
 import com.example.tcp_ip_client_2.databinding.FragmentTitleBinding;
 import com.example.tcp_ip_client_2.db.DBChatAdapter;
 import com.example.tcp_ip_client_2.db.DBChatHelper;
@@ -74,7 +62,7 @@ public class TitleFragment extends Fragment {
     private onStartFragmentTcpIp OnStartFragmentTcpIp;
     //private static final String LOG_TAG = "LOG_TAG" ;
 
-    private ChatsTitleAdapter C_Adapter;
+    private ServerListAdapter C_Adapter;
     final int MENU_RENAME = 1;
     final int MENU_DELETE = 2;
     final int MENU_SEARCH_PORT = 3;
@@ -86,12 +74,15 @@ public class TitleFragment extends Fragment {
     public String mMessage;
     public Toast toast;
     public String table_name, ipadr, port;
-    public TitleChatsItems items;
+    public ServerListItem items;
     ListView newlist;
     //private Bundle savedInstanceState;
     DBChatAdapter db_chat_Adapter; //создаем переменную для работы с базой данных
     View root;
     private static final String PREFS_FILE = "com.example.tcp_ip_client_2_preferences";
+    /*private MenuItem menu_switch_btn;
+    private MenuItem menu_clearChat;*/
+    NavController navController;
 
     public TitleFragment() {
         // Required empty public constructor
@@ -108,7 +99,7 @@ public class TitleFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
         super.onCreate( savedInstanceState );
-        setRetainInstance(true);
+        //setRetainInstance(true);
         setHasOptionsMenu(true);
     }
 
@@ -121,8 +112,7 @@ public class TitleFragment extends Fragment {
         registerForContextMenu( newlist ); //если  раньше запускать будет ошибка. фрагменты не мгновенно запускаются
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         TitleViewModel titleViewModel = new ViewModelProvider(this).get(TitleViewModel.class);
         binding = FragmentTitleBinding.inflate(inflater, container, false);
         root = binding.getRoot();
@@ -131,7 +121,7 @@ public class TitleFragment extends Fragment {
         newlist.setOnItemClickListener((arg0, arg1, position, arg3) -> onClickSelected( position ));
         FloatingActionButton btnAdd = (FloatingActionButton) root.findViewById(R.id.but_add);
         btnAdd.setOnClickListener(v1 -> {openAddDialog();});
-
+        navController = NavHostFragment.findNavController(this);
        /* Button button = root.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,8 +209,8 @@ public class TitleFragment extends Fragment {
     @SuppressLint("UseRequireInsteadOfGet")
     private void refreshTitleList() {
         ExecutorService executor = Executors.newFixedThreadPool(14);
-        ArrayList<TitleChatsItems> list = DBManager.getInstance( getActivity() ).getAllContacts();
-        for (TitleChatsItems item : list) {
+        ArrayList<ServerListItem> list = DBManager.getInstance( getActivity() ).getAllContacts();
+        for (ServerListItem item : list) {
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -251,7 +241,7 @@ public class TitleFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        C_Adapter = new ChatsTitleAdapter(getActivity() != null ? getActivity() : null, list );
+        C_Adapter = new ServerListAdapter(getActivity() != null ? getActivity() : null, list );
         newlist.setAdapter( C_Adapter );
     }
 
@@ -267,7 +257,7 @@ public class TitleFragment extends Fragment {
         builder.setMessage( "Добавить запись" );
 
         builder.setPositiveButton( "Сохранить", (dialog, id) -> {
-            TitleChatsItems item = new TitleChatsItems(
+            ServerListItem item = new ServerListItem(
                     name_ != null ? name_.getText().toString() : null,
                     ipadr_ != null ? ipadr_.getText().toString() : null,
                     port_ != null ? port_.getText().toString() : null);
@@ -280,7 +270,7 @@ public class TitleFragment extends Fragment {
         builder.show();
     }
 
-    public void openRemoveDialog(final TitleChatsItems item) {
+    public void openRemoveDialog(final ServerListItem item) {
         LayoutInflater dlgInfater = (LayoutInflater) (getActivity() != null ? getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) : null);
         View root = dlgInfater != null ? dlgInfater.inflate(R.layout.row_pod_menu, null) : null;
         final EditText name_ = root != null ? root.findViewById(R.id.detailsName) : null;
@@ -309,7 +299,7 @@ public class TitleFragment extends Fragment {
         builder.show();
     }
 
-    public void openDeleteDialog(final TitleChatsItems item) {
+    public void openDeleteDialog(final ServerListItem item) {
         LayoutInflater dlgInflater = (LayoutInflater) (getActivity() != null ? getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) : null);
         Objects.requireNonNull(dlgInflater).inflate( R.layout.row_pod_menu, null );
 
@@ -332,7 +322,7 @@ public class TitleFragment extends Fragment {
         table_name = values.get( "param1" );
         ipadr = values.get( "param2" );
         port = values.get( "param3" );
-        Adress adr = new Adress(table_name, ipadr, port );
+        ServerAdress adr = new ServerAdress(table_name, ipadr, port );
         // создаём или добавляем таблицу в базу
         DBChatHelper.setTableName(table_name);
         db_chat_Adapter.createTableIfNotExists();
@@ -345,18 +335,20 @@ public class TitleFragment extends Fragment {
         editor.putString(EnumsAndStatics.SERVER_IP_PREF, ipadr);
         editor.putString(EnumsAndStatics.SERVER_PORT_PREF, port);
         editor.apply();
-        Navigation.findNavController(root).navigate(R.id.nav_tcp_ip);
+        //Navigation.findNavController(root).navigate(R.id.nav_tcp_ip);
+        navController.navigate(R.id.nav_tcp_ip);
     }
 
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu_clearChat = menu.findItem(R.id.clearChat);
-        menu_switch_btn = menu.findItem(R.id.action_Connect_Disconnect_TCP_IP);
-        //menu_clearChat = menu.findItem(R.id.clearChat);
+        //inflater.inflate(R.menu.menu_tcp_ip, menu);
+        /*menu_clearChat = menu.findItem(R.id.clearChat);
+        menu_switch_btn = menu.findItem(R.id.action_Connect_Disconnect_TCP_IP);*/
         //menu_clearChat.setVisible(true);
-        menu_switch_btn.setVisible(true);
+       // menu_switch_btn.setVisible(true);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
 
 }

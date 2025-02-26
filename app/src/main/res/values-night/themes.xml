@@ -2,9 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.Tcp_ip_client_2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorOrange</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/colorGreyLight</item>
+        <item name="colorPrimaryVariant">@color/colorPraimary</item>
         <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="android:itemBackground">@drawable/selector</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>

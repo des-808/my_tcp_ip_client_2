@@ -1,4 +1,4 @@
-package com.example.tcp_ip_client_2.ui.title.tcp_ip;
+package com.example.tcp_ip_client_2.ui.tcpip.tcp_ip;
 
 import android.annotation.SuppressLint;
 

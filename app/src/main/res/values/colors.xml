@@ -15,6 +15,7 @@
     <color name="colorPrimaryGreen">#37d842</color>
     <color name="colorPrimaryGrey">#000000</color>
     <color name="colorGrey">#626262</color>
+    <color name="colorGreyLight">#878585</color>
     <color name="colorAccent">#0d0206</color>
     <color name="colorDark">#000000</color>
 
@@ -24,5 +25,16 @@
 
     <color name="incoming">#FBE9E7</color>
     <color name="outgoing">#EEEEEE</color>
+    <color name="colorStatusText">#63E828</color>
+    <color name="colorSendText">#53EA18</color>
+    <color name="colorRecieveText">#73E727</color>
+
+
+    <color name="backgroundTextSend">#000000</color>
+    <color name="colorTextTx">#058f3c</color>
+    <color name="colorTextRx">#002bb4</color>
+    <color name="btn_color_pressed">@color/colorGreyLight</color>
+    <color name="btn_color_default">#435EB1</color>
+
 
 </resources>

@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tcp_ip_client_2.R;
 import com.example.tcp_ip_client_2.databinding.FragmentSettingsBinding;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -41,7 +40,7 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
+       // mViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         tabLayout = binding.tabLayout;

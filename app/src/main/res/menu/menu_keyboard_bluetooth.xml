@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<item
+        android:id="@+id/clearChatBt"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:menuCategory="container"
+        android:title="@string/ClearChat"
+        android:visible="true"
+        app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/menu_bluetooth_search_to_connect"
+        android:icon="@android:drawable/stat_sys_data_bluetooth"
+        android:title="@string/menu_bluetooth"
+        android:visible="true"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/stop_connect"
+        android:enabled="true"
+        android:title="@string/stop_connect"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <!--        <item-->
+    <!--            android:id="@+id/exit_finish"-->
+    <!--            android:title="@string/exit_finish"-->
+    <!--            app:showAsAction="never" />-->
+    <item
+        android:id="@+id/nord_on"
+        android:enabled="true"
+        android:title="@string/nord_tm"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/lin_on"
+        android:enabled="true"
+        android:title="@string/lin"
+        android:visible="true"
+        app:showAsAction="never" />
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/serial1_to_bt"
+            android:icon="@android:drawable/checkbox_off_background"
+            android:saveEnabled="true"
+            android:title="@string/bt"
+            app:actionViewClass="android.widget.CheckBox"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/serial1_to_serial"
+            android:icon="@android:drawable/checkbox_off_background"
+            android:saveEnabled="false"
+            android:title="@string/serial"
+            app:actionViewClass="android.widget.CheckBox"
+            app:showAsAction="never" />
+    </group>
+</menu>

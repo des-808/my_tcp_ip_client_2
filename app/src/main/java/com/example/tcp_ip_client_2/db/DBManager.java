@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.tcp_ip_client_2.classs.TitleChatsItems;
+import com.example.tcp_ip_client_2.classs.ServerListItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,14 +53,14 @@ public class DBManager {
     }
 
     //получение полного списка контактов
-    public ArrayList<TitleChatsItems>getAllContacts(){
+    public ArrayList<ServerListItem>getAllContacts(){
         openBd();
         cursor = db.query( DBHelper.TABLE_NAME,null,null,null,null,null,null );
-        ArrayList<TitleChatsItems> list = new ArrayList<TitleChatsItems>(  );
+        ArrayList<ServerListItem> list = new ArrayList<ServerListItem>(  );
         if(cursor != null&& cursor.getCount()>0){
             cursor.moveToFirst();
             do{
-                TitleChatsItems item = new TitleChatsItems();
+                ServerListItem item = new ServerListItem();
                 item.setID( cursor.getInt( 0 ) );
                 item.setName( cursor.getString( 1 ) );
                 item.setIp_adr( cursor.getString( 2 ) );
@@ -94,7 +94,7 @@ public class DBManager {
     }
 
     //добавление нового контакта в список
-    public  int addContact(TitleChatsItems entity){
+    public  int addContact(ServerListItem entity){
         openBd();
         ContentValues values = new ContentValues( 3 );
         values.put( DBHelper.NAME, entity.getName() );
@@ -107,7 +107,7 @@ public class DBManager {
     }
 
     //обновление существующего контакта
-    public  int updateContact(TitleChatsItems entity){
+    public  int updateContact(ServerListItem entity){
         openBd();
         ContentValues values = new ContentValues( 3 );
         values.put( DBHelper.NAME, entity.getName() );

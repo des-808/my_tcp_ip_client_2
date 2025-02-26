@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/clearChat"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:menuCategory="container"
+        android:title="@string/ClearChat"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_bluetooth_search_to_connect"
+        android:icon="@android:drawable/stat_notify_sync"
+        android:title="@string/menu_bluetooth"
+        android:visible="true"
+        app:showAsAction="always" />
+</menu>

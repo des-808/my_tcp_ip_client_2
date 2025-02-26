@@ -62,15 +62,37 @@
         android:progress="0"
         android:progressTint="#2BE00A"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ports_scaning_item_count"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/table_search_ports_list" />
 
-
-
-
-
+    <TextView
+        android:id="@+id/ports_scaning_item_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar_searchPorts"
+        app:layout_constraintEnd_toStartOf="@id/ports_scaning_time_to_end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="start"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:textColor="#2BE00A"
+        />
+    <TextView
+        android:id="@+id/ports_scaning_time_to_end"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar_searchPorts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ports_scaning_item_count"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="end"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:textColor="#2BE00A"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

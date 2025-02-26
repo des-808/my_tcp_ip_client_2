@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:orientation="vertical"
-    tools:context=".ui.title.tcp_ip.TCP_IP_Fragment"
+    tools:context=".ui.tcpip.tcp_ip.TCP_IP_Fragment"
     >
    <!-- android:background="@color/backGroundMyApp"-->
     <TextView

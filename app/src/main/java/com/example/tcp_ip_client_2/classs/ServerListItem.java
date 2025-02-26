@@ -1,6 +1,6 @@
 package com.example.tcp_ip_client_2.classs;
 
-public class TitleChatsItems {
+public class ServerListItem {
     private String name;
     private String ipadr;
     private String port;
@@ -8,18 +8,22 @@ public class TitleChatsItems {
     private boolean isPortOnline;
     private boolean isIpOnline;
 
-    public TitleChatsItems(String name, String ipadr, String port){
+    public ServerListItem(String name, String ipadr, String port){
         this.name =  name;
         this.ipadr = ipadr;
         this.port =  port;
     }
-    public TitleChatsItems(int id,String name, String ipadr, String port){
+    public ServerListItem(int id, String name, String ipadr, String port){
         this.ID = id;
         this.name =  name;
         this.ipadr = ipadr;
         this.port =  port;
     }
-    public TitleChatsItems() {}
+    public ServerListItem(String ipadr, String name ){
+        this.name =  name;
+        this.ipadr = ipadr;
+    }
+    public ServerListItem() {}
     public String getName()  { return name; }
 
     public String getIp_adr() {

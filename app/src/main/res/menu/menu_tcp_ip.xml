@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_Connect_Disconnect_TCP_IP"
+        android:checkable="true"
+        android:checked="false"
+        android:icon="@drawable/ic_otkl"
+        android:menuCategory="container"
+        android:title="@string/disconnected"
+        android:visible="true"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/clearChat"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:menuCategory="container"
+        android:title="@string/ClearChat"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+</menu>

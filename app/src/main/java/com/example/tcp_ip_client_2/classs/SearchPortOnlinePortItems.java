@@ -1,29 +1,29 @@
 package com.example.tcp_ip_client_2.classs;
 
-public class SearchPortItems {
+public class SearchPortOnlinePortItems {
     private String name;
     private String ipadr;
     private String port;
     private int    ID;
     private boolean isPortOnline;
 
-    public SearchPortItems(String ipadr, String port){
+    public SearchPortOnlinePortItems(String ipadr, String port){
         this.ipadr = ipadr;
         this.port =  port;
     }
 
-    public SearchPortItems(String port, boolean isPortOnline){
+    public SearchPortOnlinePortItems(String port, boolean isPortOnline){
         this.port =  port;
         this.isPortOnline = isPortOnline;
     }
 
-    public SearchPortItems(int ID,String name,String ipadr, String port){
+    public SearchPortOnlinePortItems(int ID, String name, String ipadr, String port){
         this.ID =  ID;
         this.name = name;
         this.ipadr = ipadr;
         this.port =  port;
     }
-    public SearchPortItems() {}
+    public SearchPortOnlinePortItems() {}
 
     public String getIp_adr() {
         return ipadr;

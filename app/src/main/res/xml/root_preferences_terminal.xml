@@ -69,15 +69,17 @@
         app:singleLineTitle="true"
         app:useSimpleSummaryProvider="true"/>
     <MultiSelectListPreference
+        android:defaultValue="@array/default_timestamp_format"
         android:dependency="ShowTimestamps"
-        android:defaultValue="@array/TimestampFormat_entries"
         android:entries="@array/TimestampFormat_values"
         android:entryValues="@array/TimestampFormat_entries"
         android:key="TimestampFormat"
         android:title="Timestamp Format"
+        app:iconSpaceReserved="false"
         app:persistent="true"
-        app:singleLineTitle="true"
-        app:iconSpaceReserved="false"/>
+        app:selectable="true"
+        app:shouldDisableView="true"
+        app:singleLineTitle="true" />
     <ListPreference
         android:defaultValue="1"
         android:entries="@array/BufferSize_entries"

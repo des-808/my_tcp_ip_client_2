@@ -1,4 +1,4 @@
-package com.example.tcp_ip_client_2.ui.home;
+package com.example.tcp_ip_client_2.ui.home_page;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,10 +10,14 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("\tТута\r\nСтартовая страница");
     }
 
     public LiveData<String> getText() {
         return mText;
+    }
+    public void setText(String text) {
+
+        mText.setValue(text);
     }
 }

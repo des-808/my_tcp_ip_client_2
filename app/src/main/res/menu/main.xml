@@ -2,23 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_Connect_Disconnect_TCP_IP"
-        android:checkable="true"
-        android:checked="false"
-        android:icon="@drawable/ic_otkl"
-        android:menuCategory="container"
-        android:title="@string/disconnected"
-        android:visible="true"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/clearChat"
-        android:icon="@android:drawable/ic_menu_delete"
-        android:menuCategory="container"
-        android:title="@string/ClearChat"
-        android:visible="true"
-        app:showAsAction="always" />
-    <item
+
+    <!--<item
         android:id="@+id/action_settings"
         android:checkable="false"
         android:checked="false"
@@ -26,14 +11,13 @@
         android:menuCategory="container"
         android:title="@string/Settings"
         android:visible="true"
-        app:showAsAction="collapseActionView" />
+        app:showAsAction="collapseActionView" />-->
     <item
         android:id="@+id/oProgramme"
         android:icon="@android:drawable/ic_menu_share"
         android:menuCategory="container"
         android:title="@string/oProgramme"
         android:visible="true"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="never" />
 
 </menu>
