@@ -461,7 +461,7 @@ public class MipIFragment extends Fragment implements OnMessageReceivedListener 
                 set_strRxTx("Tx",mipi.sendWriteRegistrationOfLengthThermalCableAlarmCondition(isChecked));
             }
         });
-        return root;//inflater.inflate(R.layout.fragment_mip_i, container, false);
+        return root;
 
     }
 
@@ -481,7 +481,7 @@ public class MipIFragment extends Fragment implements OnMessageReceivedListener 
                        parts[2] = "      : ";
                 try {
                     // Запуск таймера
-                    timerRx.postDelayed(runnable, 100);
+                    timerRx.postDelayed(runnable, 300);
                 }catch (Exception e){
                     //e.printStackTrace();
                     Log.e("timerRx", e.toString());
@@ -492,7 +492,6 @@ public class MipIFragment extends Fragment implements OnMessageReceivedListener 
         }
         strRxTx = String.join("\n", parts);
         mipiViewModel.setmTextRxTx((strRxTx));
-        //mipiViewModel.getmTextRxTx().observe(getViewLifecycleOwner(), textViewRxTx::setText);
     }
     byte[] set_strRxTx(String InOut,byte[] message){
         String str = "";
@@ -551,8 +550,14 @@ public class MipIFragment extends Fragment implements OnMessageReceivedListener 
     //@Override
     public void onMessageReceived(byte[] message){
         timerRx.removeCallbacks(runnable);//отключаем таймер
-        set_strRxTx("Rx",message);
-        mipi.parser.getBuffer_Ressive(mipi.buffer_Transmitte,message);
+        if(mipi.parser.getBuffer_Ressive(mipi.buffer_Transmitte,message)==null){
+            set_strRxTx("Rx",message);//для отладки выводим сообщение что бы увидеть что пришло
+            set_strRxTx("Message",mipi.parser.getMessageError());
+        }
+        else{
+            set_strRxTx("Rx",message);
+            set_strRxTx("Message","OK");
+        }
         //mipi.device.print();
     }
     public void sendData(byte[] data) {

@@ -43,7 +43,7 @@ public class Nord {
                 }
             } else {
 
-                if ((buffer[i] == 40)) {//((buffer[bytesArray] == stopInd)) &&
+                if ((buffer[i] == 40)) {//((buffer[bytesArray] == stopInd)) &&stopBitPacket
                     //bufferNord = buffer;
                     sdvig = 0;
                     startbit = true;

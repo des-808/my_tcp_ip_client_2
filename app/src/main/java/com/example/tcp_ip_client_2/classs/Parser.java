@@ -5,16 +5,25 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 
 public class Parser {
-        private final Device device;
-        private float val = 0;
-        private final static String TAG_PARSER = "PARSER";
+    private final Device device;
+    private float val = 0;
+    private final static String TAG_PARSER = "PARSER";
+    private String messageError = "";
+    public String getMessageError() {
+        return messageError;
+    }
+    public void setMessageError(String messageError) {
+        this.messageError = messageError;
+    }
 
     public Parser(Device device) {
             this.device = device;
         }
         public Device getBuffer_Ressive(byte[] buffer_Transmitte ,byte[] buffer){
             if(!isValidChecksum(buffer)){
-                log("Чек Сумма не совпадает");
+                String errorFunction = "Чек Сумма не совпадает";
+                log(errorFunction);
+                setMessageError(errorFunction);
                 return null;
             }else {
                 if(!parseFromBytes(buffer_Transmitte,buffer))
@@ -34,21 +43,30 @@ public class Parser {
             int HEADER_SIZE = 2;// Адрес + Функция
             int ERROR_SIZE = 1;// Байт описания ошибки от ведомого устройства
             int FOOTER_SIZE = 2;// Контрольная сумма
+            String errorFunction;
 
             if (bytes.length < HEADER_SIZE + ERROR_SIZE + FOOTER_SIZE) {
-                log("Недостаточно данных для парсинга или выходит за пределы массива");
+                errorFunction ="Недостаточно данных для парсинга или выходит за пределы массива";
+                log(errorFunction);
+                setMessageError(errorFunction);
                 return false;
             }
             if (bytes[0] != buffer_Transmitte[0]) {
-                log("Неверный адрес");
+                errorFunction ="Неверный адрес";
+                log(errorFunction);
+                setMessageError(errorFunction);
                 return false;
             }
             if ((bytes[1] != buffer_Transmitte[1])&&((bytes[1]&0x80)==0)) {
-                log("Отправленая функция не совпадает с функцией, которая принята");
+                errorFunction ="Отправленая функция не совпадает с функцией, которая принята";
+                log(errorFunction);
+                setMessageError(errorFunction);
                 return false;
             }
             if ((bytes[1] != buffer_Transmitte[1])&&((bytes[1]&0x80)!=0)) {
-                log(errorFunction(bytes[2])+"\r\nНеверная функция");
+                errorFunction = errorFunction(bytes[2])+"\r\nНеверная функция";
+                log(errorFunction);
+                setMessageError(errorFunction);
                 return false;
             }
             try{
@@ -83,10 +101,17 @@ public class Parser {
                         return true;
                     case FUNCTION_SET_REGISTER:
 
-                        if(       buffer_Transmitte[buffer_Transmitte.length-2]==bytes[bytes.length-2]
+                        if(buffer_Transmitte[buffer_Transmitte.length-2]==bytes[bytes.length-2]
                                 &&buffer_Transmitte[buffer_Transmitte.length-1]==bytes[bytes.length-1]){
-                            System.out.println("FUNCTION_SET_REGISTER:\r\n Запись проведена успешно");}
-                        else{System.out.println("FUNCTION_SET_REGISTER:\r\nЗапись проведена не успешно (ЧТО-То Пошло не так)");}
+                            errorFunction = "FUNCTION_SET_REGISTER:\r\n Запись проведена успешно";
+                            log(errorFunction);
+                            setMessageError(errorFunction );
+                        }
+                        else{
+                            errorFunction = "FUNCTION_SET_REGISTER:\r\n Запись проведена не успешно (ЧТО-То Пошло не так)";
+                            log(errorFunction);
+                            setMessageError(errorFunction );
+                        }
                         return true;
                     case FUNCTION_SET_GROUP_REGISTERS:
                         byte[] adr = new byte[]{bytes[2],bytes[3]};
@@ -94,17 +119,23 @@ public class Parser {
                         byte[] transmit_adr = new byte[]{buffer_Transmitte[2],buffer_Transmitte[3]};
                         byte[] transmit_kolReg = new byte[]{buffer_Transmitte[4],buffer_Transmitte[5]};
                         if( adr[0] == transmit_adr[0] && adr[1] == transmit_adr[1] && kolReg[0] == transmit_kolReg[0] && kolReg[1] == transmit_kolReg[1] ){
-                            log("FUNCTION_SET_GROUP_REGISTERS:\r\n Запись проведена успешно");
+                            errorFunction = "FUNCTION_SET_GROUP_REGISTERS:\r\n Запись проведена успешно";
+                            log(errorFunction);
+
                             return true;
                         }else{
-                            log("FUNCTION_SET_GROUP_REGISTERS:\r\n Запись проведена не без успешно (ЧТО-То Пошло не так)");
+                            errorFunction = "FUNCTION_SET_GROUP_REGISTERS:\r\n Запись проведена не успешно (ЧТО-То Пошло не так)";
+                            log(errorFunction);
+                            setMessageError(errorFunction );
                         }
                         return false;
                     default:break;
                 }
                 return false;
             } catch (Exception e) {
-                log("Ошибка при обработке данных: "  );//+e.getMessage();
+                errorFunction = "Ошибка при обработке данных: ";
+                log(errorFunction  );//+e.getMessage();
+                setMessageError(errorFunction);
                 return false;
             }
         }
