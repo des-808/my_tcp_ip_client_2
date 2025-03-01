@@ -66,11 +66,6 @@ public class MipIFragment extends Fragment implements OnMessageReceivedListener 
         return new MipIFragment();
     }
 
-    int bytesToInteger(byte[] b) {
-        int i = (b[1] & 0xFF) | ((b[0] & 0xFF) << 8);
-        return i;
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mipiViewModel = new ViewModelProvider(this).get(MipIViewModel.class);
@@ -121,11 +116,11 @@ public class MipIFragment extends Fragment implements OnMessageReceivedListener 
         TextView ups2Status = binding.ups2Status;
         TextView textViewSearchAaddress = binding.textViewSearchAaddress;
 
-        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch switchResetVolumeAll    = binding.switchResetVolumeAll;
-        ImageButton btnResetVolume    = binding.btnResetVolume;
-        Button btnResetAlarm     = binding.btnResetAlarm;
-        Button btnGetParametersAll     = binding.btnGetParametersAll;
-        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch switchGetParametersAllCicle     = binding.switchGetParametersAllCicle;
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch switchResetVolumeAll = binding.switchResetVolumeAll;
+        ImageButton btnResetVolume = binding.btnResetVolume;
+        Button btnResetAlarm       = binding.btnResetAlarm;
+        Button btnGetParametersAll = binding.btnGetParametersAll;
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch switchGetParametersAllCicle = binding.switchGetParametersAllCicle;
 
         ArrayAdapter<CharSequence> spinnerArrayAdapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_boudrate_array, android.R.layout.simple_spinner_item);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -307,7 +302,7 @@ public class MipIFragment extends Fragment implements OnMessageReceivedListener 
             }
         });
         String positionAddress = String.valueOf(ByteBuffer.wrap(mipi.device.readRegisterData(1)).getShort());
-        //mipiViewModel.setSpinnerDataOld(position);
+;
         spinnerOldAddress.setSelection(spinnerArrayAdapterOldAddress.getPosition(positionAddress));
         spinnerNewAddress.setSelection(spinnerArrayAdapterNewAddress.getPosition(positionAddress));
 
@@ -650,6 +645,11 @@ public class MipIFragment extends Fragment implements OnMessageReceivedListener 
           case 0x15: str = "ОБНАРУЖЕН ПРИБОР <МИП-3И - V2>"; break;
       }
       return str;
+    }
+
+    int bytesToInteger(byte[] b) {
+        int i = (b[1] & 0xFF) | ((b[0] & 0xFF) << 8);
+        return i;
     }
 
 
