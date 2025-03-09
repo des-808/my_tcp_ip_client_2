@@ -374,7 +374,12 @@ implements  TCPListener,
             }
         });
     }
-
+     /*TODO
+     * message_server_online - массив байтов сообщения отправляемых для поддержания связи с сервером.
+     * Отсылать сообщение можно только при соединении с сервером. и каждые 30 секунд.
+     */
+    byte[] message_server_online = new byte[]{0x31, 0x30, 0x31, 0x31, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x40, 0x20, 0x20, 0x20, 0x20};
+    String message_server_online_hex = message_server_online.toString();
     @SuppressLint("UseRequireInsteadOfGet")
     public void sendTx()  {
         vibrator.vibrate(100);

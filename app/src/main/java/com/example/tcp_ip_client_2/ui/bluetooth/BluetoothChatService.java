@@ -532,10 +532,8 @@ public class BluetoothChatService {
         public void run() {
             Log.i(TAG, "BEGIN mConnectedThread");
            // byte[] buffer = new byte[128];
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[256];
             int bytesArray = 0;
-            //boolean startbit = true;
-
             // Keep listening to the InputStream while connected
             while (mState == STATE_CONNECTED) {
                     try{
@@ -549,80 +547,6 @@ public class BluetoothChatService {
                         connectionLost();
                         break;
                     }
-
-                /*if (Swith_Terminal.isTerminal()){
-                    try{
-                        // Read from the InputStream
-                        buffer[bytesArray] = (byte) mmInStream.read();
-                        // Send the obtained bytes to the UI Activity
-                        if (startbit) {
-                            if (buffer[bytesArray] == startBitPacket) {
-                                bytesArray = 1;
-                                startbit = false;
-                            }
-                        } else {
-                            if (buffer[bytesArray] == stopBitPacket){
-                                bytesArray = 0;
-                                startbit = true;
-                                mHandler.obtainMessage(Constants.MESSAGE_READ, bytesArray, -1, buffer).sendToTarget();
-                            } else bytesArray++;
-
-                        }
-                    } catch (IOException e) {
-                        Log.e(TAG, "disconnected", e);
-                        connectionLost();
-                        break; }
-                }*/
-
-                /*if (Swith_Terminal.isNord()) {
-                    try {
-                        // Read from the InputStream
-                        buffer[bytesArray] = (byte) mmInStream.read();
-                        // Send the obtained bytes to the UI Activity
-                        if (startbit) {
-                            if ((buffer[bytesArray] == startInd1) || (buffer[bytesArray] == startInd2)) {
-                                bytesArray = 1;
-                                startbit = false;
-                            }
-                        } else {
-                            if (
-//                                    ((buffer[bytesArray] == stopInd)) &&
-                                    (bytesArray == 40)) {
-                                mHandler.obtainMessage(Constants.MESSAGE_READ, bytesArray, -1, buffer).sendToTarget();
-                                bytesArray = 0;
-                                startbit = true;
-                            } else bytesArray++;
-
-                        }
-                    } catch (IOException e) {
-                        Log.e(TAG, "disconnected", e);
-                        connectionLost();
-                        break; }
-                }*/
-
-               /* if (Swith_Terminal.isLin()){
-                    try{
-                        // Read from the InputStream
-                        buffer[bytesArray] = (byte) mmInStream.read();
-                        // Send the obtained bytes to the UI Activity
-                        if (startbit) {
-                            if (buffer[bytesArray] == startBitPacket) {
-                                bytesArray = 1;
-                                startbit = false;
-                            }
-                        } else {
-                            if (buffer[bytesArray] == stopBitPacket){
-                                bytesArray = 0;
-                                startbit = true;
-                                mHandler.obtainMessage(Constants.MESSAGE_READ, bytesArray, -1, buffer).sendToTarget();
-                            } else bytesArray++;
-
-                        }
-                    } catch (IOException e) {
-                        Log.e(TAG, "disconnected", e);
-                        connectionLost();
-                        break; }
-                }*/
             }
         }
 

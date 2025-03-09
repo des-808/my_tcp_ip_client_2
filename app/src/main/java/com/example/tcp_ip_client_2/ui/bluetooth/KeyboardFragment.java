@@ -14,14 +14,19 @@ import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,6 +43,7 @@ import android.widget.Toast;
 import com.example.tcp_ip_client_2.R;
 import com.example.tcp_ip_client_2.classs.Nord;
 import com.example.tcp_ip_client_2.classs.Swith_Terminal;
+import com.example.tcp_ip_client_2.databinding.FragmentKeyboardBinding;
 import com.hoho.android.usbserial.BuildConfig;
 
 import java.io.UnsupportedEncodingException;
@@ -57,6 +63,10 @@ public class KeyboardFragment extends Fragment {
     private static final int READ_WAIT_MILLIS = 2000;
     private KeyboardFragment.BluetoothPermission bluetoothPermission = KeyboardFragment.BluetoothPermission.Unknown;
     private final BroadcastReceiver broadcastReceiver;
+    KeyboardViewModel keyboardViewModel;
+    FragmentKeyboardBinding binding;
+    View root;
+    Vibrator vibrator;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -110,8 +120,8 @@ public class KeyboardFragment extends Fragment {
     public static final byte    securityLed_zaderjka_s_avariey                = (byte)0xCE;//0xCE;
     public static final byte    securityLed_end_zaderjka_bez_avarii           = (byte)0xC4;//0xC4;
     public static final byte    securityLed_end_zaderjka_s_avariey            = (byte)0xC6;//0xC6;
-    //public static final byte    securityLed_pri_sniatii_s_ohrany_bez_avarii   = (byte)0x80;//0x80;
-    //public static final byte    securityLed_pri_sniatii_s_ohrany_s_avariey    = (byte)0x82;//0x82;
+    //public static final byte    securityLed_pri_snyatii_s_ohrany_bez_avarii   = (byte)0x80;//0x80;
+    //public static final byte    securityLed_pri_snyatii_s_ohrany_s_avariey    = (byte)0x82;//0x82;
     public static final byte    securityLed_sniyato_s_ohrany_bez_avarii       = (byte)0x00;//0x00;
     public static final byte    securityLed_sniyato_s_ohrany_s_avariey        = (byte)0x02;//0x02;
     public static final byte    securityLed_otkaz_vziatiya_bez_avarii         = (byte)0x40;//0x40;
@@ -153,7 +163,7 @@ public class KeyboardFragment extends Fragment {
                 if(INTENT_ACTION_GRANT_BLUETOOTH.equals(intent.getAction())) {
                     bluetoothPermission = intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)
                             ? KeyboardFragment.BluetoothPermission.Granted : KeyboardFragment.BluetoothPermission.Denied;
-                    //connect();
+                   // connect();
                 }
             }
         };
@@ -201,12 +211,6 @@ public class KeyboardFragment extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_keyboard, container, false);
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -224,7 +228,7 @@ public class KeyboardFragment extends Fragment {
                     setupChat();
                 } else {
                     // Пользователь не включил Bluetooth или произошла ошибка
-                    //.d(TAG, "BT not enabled");
+                    //Log.d(TAG, "BT not enabled");
                     //Toast.makeText(getActivity(), R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
                     //getActivity().finish();
                 }
@@ -306,8 +310,17 @@ public class KeyboardFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-       /* if (mBluetoothAdapter != null)
-            mBluetoothAdapter.close();*/
+        if (mBluetoothAdapter != null)
+            if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }mBluetoothAdapter.disable();
         if (mChatService != null) { mChatService.stop(); }
     }
 
@@ -326,33 +339,58 @@ public class KeyboardFragment extends Fragment {
         }
     }
 
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        keyboardViewModel = new ViewModelProvider(this).get(KeyboardViewModel.class);
+        binding = FragmentKeyboardBinding.inflate(inflater, container, false);
+        root = binding.getRoot();
+        vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        keyboardViewModel.getKeyboardStr1().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                keyboardStr1.setText(s);
+            }
+        });
+        keyboardViewModel.getKeyboardStr2().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                keyboardStr2.setText(s);
+            }
+        });
+        keyboardViewModel.getKeyboardStr3().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                keyboardStr3.setText(s);
+            }
+        });
 
+        return root;
+    }
 
     @Override
-    public void onViewCreated(View view,  Bundle savedInstanceState) {
-        keyboardStr1 = (TextView) view.findViewById(R.id.keyboardStr1);
-        keyboardStr2 = (TextView) view.findViewById(R.id.keyboardStr2);
-        keyboardStr3 = (TextView) view.findViewById(R.id.keyboardStr3);
-
-        avariya =        (ImageView)view.findViewById(R.id.alertLed);
-        security =     (ImageView)view.findViewById(R.id.securityLed);
-
-        Button btn_0 = (Button) view.findViewById(R.id.btn_0);
-        Button btn_1 = (Button) view.findViewById(R.id.btn_1);
-        Button btn_2 = (Button) view.findViewById(R.id.btn_2);
-        Button btn_3 = (Button) view.findViewById(R.id.btn_3);
-        Button btn_4 = (Button) view.findViewById(R.id.btn_4);
-        Button btn_5 = (Button) view.findViewById(R.id.btn_5);
-        Button btn_6 = (Button) view.findViewById(R.id.btn_6);
-        Button btn_7 = (Button) view.findViewById(R.id.btn_7);
-        Button btn_8 = (Button) view.findViewById(R.id.btn_8);
-        Button btn_9 = (Button) view.findViewById(R.id.btn_9);
-        Button btn_zv = (Button) view.findViewById(R.id.btn_zv);
-        Button btn_resh = (Button) view.findViewById(R.id.btn_resh);
-        Button btn_end = (Button) view.findViewById(R.id.btn_end);
-        Button btn_next = (Button) view.findViewById(R.id.btn_next);
-        Button btn_back = (Button) view.findViewById(R.id.btn_back);
-        Button btn_enter = (Button) view.findViewById(R.id.btn_enter);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        keyboardStr1 = binding.keyboardStr1;
+        keyboardStr2 = binding.keyboardStr2;
+        keyboardStr3 = binding.keyboardStr3;
+        avariya =      binding.alertLed;
+        security =     binding.securityLed;
+        Button btn_0 = binding.btn0;
+        Button btn_1 = binding.btn1;
+        Button btn_2 = binding.btn2;
+        Button btn_3 = binding.btn3;
+        Button btn_4 = binding.btn4;
+        Button btn_5 = binding.btn5;
+        Button btn_6 = binding.btn6;
+        Button btn_7 = binding.btn7;
+        Button btn_8 = binding.btn8;
+        Button btn_9 = binding.btn9;
+        Button btn_zv = binding.btnZv;
+        Button btn_resh = binding.btnResh;
+        Button btn_end = binding.btnEnd;
+        Button btn_next = binding.btnNext;
+        Button btn_back = binding.btnBack;
+        Button btn_enter = binding.btnEnter;
 
         btn_0.setOnClickListener(oclBtn);
         btn_1.setOnClickListener(oclBtn);
@@ -376,24 +414,26 @@ public class KeyboardFragment extends Fragment {
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
+            byte[] byteBuferr = new byte[]{0x00,0x00};
             int id = v.getId();
             // по id определеяем кнопку, вызвавшую этот обработчик
-            if (id == R.id.btn_1) {byteBuferr[0] = (byte) 0x01;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_2)      {byteBuferr[0] = (byte) 0x02;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_3)      {byteBuferr[0] = (byte) 0x03;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_4)      {byteBuferr[0] = (byte) 0x04;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_5)      {byteBuferr[0] = (byte) 0x05;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_6)      {byteBuferr[0] = (byte) 0x06;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_7)      {byteBuferr[0] = (byte) 0x07;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_8)      {byteBuferr[0] = (byte) 0x08;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_9)      {byteBuferr[0] = (byte) 0x09;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_0)      {byteBuferr[0] = (byte) 0x0A;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_zv)     {byteBuferr[0] = (byte) 0x0B;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_resh)   {byteBuferr[0] = (byte) 0x0C;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_end)    {byteBuferr[0] = (byte) 0x16;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_next)   {byteBuferr[0] = (byte) 0x18;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_back)   {byteBuferr[0] = (byte) 0x17;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
-            else if (id == R.id.btn_enter)  {byteBuferr[0] = (byte) 0x15;sendMessage(bufferOutMessage(data, byteBuferr));vibrates();}
+            if (id == R.id.btn_1)           {byteBuferr[0] = (byte) 0x01;}
+            else if (id == R.id.btn_2)      {byteBuferr[0] = (byte) 0x02;}
+            else if (id == R.id.btn_3)      {byteBuferr[0] = (byte) 0x03;}
+            else if (id == R.id.btn_4)      {byteBuferr[0] = (byte) 0x04;}
+            else if (id == R.id.btn_5)      {byteBuferr[0] = (byte) 0x05;}
+            else if (id == R.id.btn_6)      {byteBuferr[0] = (byte) 0x06;}
+            else if (id == R.id.btn_7)      {byteBuferr[0] = (byte) 0x07;}
+            else if (id == R.id.btn_8)      {byteBuferr[0] = (byte) 0x08;}
+            else if (id == R.id.btn_9)      {byteBuferr[0] = (byte) 0x09;}
+            else if (id == R.id.btn_0)      {byteBuferr[0] = (byte) 0x0A;}
+            else if (id == R.id.btn_zv)     {byteBuferr[0] = (byte) 0x0B;}
+            else if (id == R.id.btn_resh)   {byteBuferr[0] = (byte) 0x0C;}
+            else if (id == R.id.btn_end)    {byteBuferr[0] = (byte) 0x16;}
+            else if (id == R.id.btn_next)   {byteBuferr[0] = (byte) 0x18;}
+            else if (id == R.id.btn_back)   {byteBuferr[0] = (byte) 0x17;}
+            else if (id == R.id.btn_enter)  {byteBuferr[0] = (byte) 0x15;}
+            if(byteBuferr[0] != 0){sendMessage(nordParser.packet_To_BtMessage.bufferSetMessage(data, byteBuferr,1));vibrates();}
         }
     };
 
@@ -411,7 +451,6 @@ public class KeyboardFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_bluetooth_search_to_connect) {
-            //tostString("здрасте я терминал");
             // Launch the DeviceListActivity to see devices and do scan
             Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
             startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
@@ -435,7 +474,7 @@ public class KeyboardFragment extends Fragment {
         if (id == R.id.nord_on) {//"Nord On Lin Off"
             Swith_Terminal.setNord();
             byteBuferr[0] = (byte)0x30;
-            sendMessage(bufferOutMessage(comand, byteBuferr));
+            sendMessage(nordParser.packet_To_BtMessage.bufferSetMessage(comand, byteBuferr,1));
             vibrates();
             return true;
         }
@@ -443,30 +482,19 @@ public class KeyboardFragment extends Fragment {
             Swith_Terminal.setLin();
             byteBuferr[0] = (byte)0x31;
             //sendMessage(bufferOutMessage(data,"abrakadabra epta"));
-            sendMessage(bufferOutMessage(comand, byteBuferr));
+            sendMessage(nordParser.packet_To_BtMessage.bufferSetMessage(comand, byteBuferr,1));
             vibrates();
             return true;
         }
         if (id == R.id.serial1_to_bt) {//"Serial1 to Bluetooth"
-//                if (item.isChecked()) {item.setChecked(false);btCheck = false;}
-//                else {item.setChecked(true);btCheck = true;}
-//                if ((btCheck) && (serialCheck)) {byteBuferr[0] = (byte)0x34;}
-//                if ((btCheck) && (!serialCheck)) {byteBuferr[0] = (byte)0x32;}
-//                if ((!btCheck) && (!serialCheck)) {byteBuferr[0] = (byte)0x00;}
             byteBuferr[0] = (byte)0x32;
-            sendMessage(bufferOutMessage(comand, byteBuferr));
+            sendMessage(nordParser.packet_To_BtMessage.bufferSetMessage(comand, byteBuferr,1));
             vibrates();
             return true;
         }
         if (id == R.id.serial1_to_serial) {//"Serial1 to Serial"
-//               if (item.isChecked()) {item.setChecked(false);serialCheck = false;}
-//               else {item.setChecked(true);serialCheck = true;}
-//               if ((serialCheck) && (btCheck)) {byteBuferr[0] = (byte)0x34;}
-//               if ((serialCheck) && (!btCheck)) {byteBuferr[0] = (byte)0x33;}
-//               if ((!serialCheck) && (!btCheck)) {byteBuferr[0] = (byte)0x00;}
-
             byteBuferr[0] = (byte)0x33;
-            sendMessage(bufferOutMessage(comand,byteBuferr));
+            sendMessage(nordParser.packet_To_BtMessage.bufferSetMessage(comand,byteBuferr,1));
             //sendMessage(bufferOutMessage(data,"abrakadabra"));
             vibrates();
             return true;
@@ -484,6 +512,12 @@ public class KeyboardFragment extends Fragment {
         return false;
     }
 
+    public void nord_on_to_bt() {
+        byteBuferr[0] = (byte)0x32;
+        sendMessage(nordParser.packet_To_BtMessage.bufferSetMessage(comand, byteBuferr,1));
+        byteBuferr[0] = (byte)0x30;
+        sendMessage(nordParser.packet_To_BtMessage.bufferSetMessage(comand, byteBuferr,1));
+    }
 
     private void sendMessage(byte[] bytebuf) {
         if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED) {
@@ -498,62 +532,30 @@ public class KeyboardFragment extends Fragment {
         //}
     }
 
-    public byte[] bufferOutMessage(byte commandElseDataFlag, byte[] byteBufIn ) {
-        byte[] bytebuf  = new byte[dlinnaMassiva];  // максимальная длинна 64 байта
-        int dlinnaByteBuf = 0;//byteBufIn.length;
-        for (int x = 0;x < 64; ++x){
-            if ((byteBufIn[x] == 0)&&(byteBufIn[x+1] == 0)&&(byteBufIn[x+2] == 0)&&(byteBufIn[x+3] == 0)&&(byteBufIn[x+4] == 0)){
-                dlinnaByteBuf=x;
-                break;
-            }
-        }
-        int dlinnaSoobsheniya = 3+dlinnaByteBuf+2+1;
+    /*public byte[] bufferSetMessage(byte commandElseDataFlag, byte[] byteBufIn, int lengthByteBufIn ) {
+        int dlinnaSoobsheniya = 3+lengthByteBufIn+2+1;
+        byte[] bytebuf  = new byte[dlinnaSoobsheniya];  // максимальная длинна 64 байта
         //Charset cset = Charset.forName("CP866");
         //String readMessage = new String(readBuf, cset);// построить строку из допустимых байтов в буфере в кодировке cp866
         bytebuf[0] = startBit;
         bytebuf[1] = (byte)dlinnaSoobsheniya;
         bytebuf[2] = commandElseDataFlag;
         int z = 3;
-        int crc = 32;
-        for(int i = 0; i<dlinnaByteBuf; ++i){
+        for(int i = 0; i<lengthByteBufIn; ++i){
             bytebuf[z] = byteBufIn[i]  ;
             z++;
         }
-        bytebuf[z] = (byte)crc;z++;
-        bytebuf[z] = (byte)crc;z++;
+        byte[] crc =  nordParser.crcCalculator(bytebuf,lengthByteBufIn-3);
+        bytebuf[z] = crc[1];z++;
+        bytebuf[z] = crc[0];z++;
         bytebuf[z] = stopBit;
-        //z = 0;
+        Log.d("BYTEBUF", bytesToHex( bytebuf));
         return bytebuf;
-    }
-
-    public byte[] bufferOutMessage(byte commandElseDataFlag, String stringBufIn) {
-        byte[] bytebuf  = new byte[dlinnaMassiva];  // максимальная длинна 64 байта
-        int dlinnaStroki = stringBufIn.length();
-        int dlinnaSoobsheniya = 3+dlinnaStroki+2+1;
-        //Charset cset = Charset.forName("CP866");
-        bytebuf[0] = startBit;
-        bytebuf[1] = (byte)dlinnaSoobsheniya;
-        bytebuf[2] = commandElseDataFlag;
-        int j = 0;
-        int z = 3;
-        int crc = 32;
-        byte[] buter = stringBufIn.getBytes();
-        for(int i = 0;i<dlinnaStroki; ++i){
-            bytebuf[z] = buter[j]  ;
-            j++;
-            z++;
-        }
-        bytebuf[z] = (byte)crc;z++;
-        bytebuf[z] = (byte)crc;z++;
-        bytebuf[z] = stopBit;z++;
-        j = 0;z = 0;
-        return bytebuf;
-    }
+    }*/
 
     public void vibrates() { vibrate(60); }
     public void vibrate(long duration) {
-        Vibrator vibs = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-        vibs.vibrate(duration);
+        vibrator.vibrate(duration);
     }
 
     public static byte IntToByte(int i){
@@ -566,7 +568,7 @@ public class KeyboardFragment extends Fragment {
 
     public String changeCharInPosition(int position, char ch, String str){
         char[] charArray = str.toCharArray();
-        charArray[position]= ch;
+        charArray[position] = ch;
         return new String(charArray);
     }
 
@@ -580,11 +582,8 @@ public class KeyboardFragment extends Fragment {
     public static String bytesToHex(byte[] buf) {
         char[] chars = new char[2 * buf.length];
         for (int i = 0; i < buf.length; ++i) {
-            //int in =  (buf[i] & 0xff);
             chars[2 * i] = HEX_CHARS[(buf[i] & 0xF0) >>> 4];
             chars[2 * i + 1] = HEX_CHARS[buf[i] & 0x0F];
-            //chars[2 * i] = HEX_CHARS[(in& 0xF0) >>> 4];
-            //chars[2 * i + 1] = HEX_CHARS[in & 0x0F];
         }
         return new String(chars);
     }
@@ -602,7 +601,6 @@ public class KeyboardFragment extends Fragment {
                 return data;
             }
             else
-
             {
                 return  null;
             }
@@ -690,7 +688,7 @@ public class KeyboardFragment extends Fragment {
                     ha_avariya_led.postDelayed(this, 1000);
                 }
             }
-        }, 1000);
+        }, 999);//перезапуск задачи через 1 секунду. если не сработало ha_avariya_led.postDelayed(this, 1000);
     }
 
     private void stop_avariya_led() {
@@ -734,13 +732,11 @@ public class KeyboardFragment extends Fragment {
                 case Constants.MESSAGE_STATE_CHANGE:
                     switch (msg.arg1) {
                         case BluetoothChatService.STATE_CONNECTED:
-                            //setStatus(getString(R.string.title_connected_to));
-                            //Toast.makeText(getContext(), msg.arg2, Toast.LENGTH_SHORT).show();
-                            //mConversationArrayAdapter.clear();
+                            keyboardViewModel.setKeyboardStr1(" Connect ");
+                            keyboardViewModel.setKeyboardStr2(" to socket ");
+                            keyboardViewModel.setKeyboardStr3("");
+                            nord_on_to_bt();
 
-                            keyboardStr1.setText(" Connect ");
-                            keyboardStr2.setText(" to socket ");
-                            keyboardStr3.setText("");
                             break;
                         case BluetoothChatService.STATE_CONNECTING:
                             //setStatus(getString(R.string.title_connecting));
@@ -757,9 +753,9 @@ public class KeyboardFragment extends Fragment {
                         case BluetoothChatService.STATE_NONE:
                             String no_connect = "Disconnect to socket";
                             String xxz = "";
-                            keyboardStr1.setText(xxz);
-                            keyboardStr2.setText(xxz);
-                            keyboardStr3.setText(xxz);
+                            keyboardViewModel.setKeyboardStr1(xxz);
+                            keyboardViewModel.setKeyboardStr2(xxz);
+                            keyboardViewModel.setKeyboardStr3(xxz);
                             //tostString( no_connect);
                             stop_avariya_led();
                             stop_security_led();
@@ -777,116 +773,72 @@ public class KeyboardFragment extends Fragment {
                     break;
 
                 case Constants.MESSAGE_READ:
-                    byte[] readBuf = new byte[128];
-                    // Send the obtained bytes to the UI Activity
-                    if(nordParser.ressiveBuffer((byte[]) msg.obj,msg.arg1)){break;}
-                    else{readBuf = nordParser.getBuffer();}
-                    /*if (startbit) {
-                        if ((buffer[bytesArray] == startInd1) || (buffer[bytesArray] == startInd2)) {
-                            bytesArray = 1;
-                            startbit = false;
-                        }
-                    } else {
-                        if (//((buffer[bytesArray] == stopInd)) &&
-                                (bytesArray == 40)) {
-                            mHandler.obtainMessage(Constants.MESSAGE_READ, bytesArray, -1, buffer).sendToTarget();
-                            readBuf = buffer;
-                            bytesArray = 0;
-                            startbit = true;
-                        } else
-                        {
-                            bytesArray++;
-                            break;
-                        }
-                    }*/
+                    if(!nordParser.ressiveBuffer((byte[]) msg.obj,msg.arg1)){break;}
+                    //byte[] readBuf = nordParser.getBuffer_packet();
+                    //Log.d("Packet",bytesToHex( readBuf));
 
-                   /* if(Swith_Terminal.isLin()){
-                        Charset cset = Charset.forName("CP866");
-                        String readMessage = new String(readBuf, cset);// построить строку из допустимых байтов в буфере в кодировке cp866
-                        // readBuf
-                        //String readMessage = new String(readBuf, 0, msg.arg1);
-                        keyboardStr3.setText(readMessage);
-                        break;
-                    }*/
                     Charset cset = Charset.forName("CP866");
-                    String readMessage = new String(readBuf, cset);// построить строку из допустимых байтов в буфере в кодировке cp866
-                    //String readMessage = new String(readBuf, 0, msg.arg1);// построить строку из допустимых байтов в буфере
-                    //Log.d(TAG, readMessage);
+                    String readMessage = new String(nordParser.getBuffer_packet(), cset);// построить строку из допустимых байтов в буфере в кодировке cp866
                     sb.append(readMessage); // формируем строку
                     lenghtString = "";
-                    //Log.d(TAG, "мы тут бываем");
                     lenghtString = sb.substring(0, 41);
 
-                    String simwol_sicurity = lenghtString.substring(33,34);
+                    /*String simwol_sicurity = lenghtString.substring(33,34);
                     String polojenie_karetki = lenghtString.substring(34,35);
                     String simwol_oblPost = lenghtString.substring(39,40);
-                    String simwol_neispravnosti = lenghtString.substring(40,41);
-                    String sicurityAlarmStr = simwol_sicurity+polojenie_karetki+simwol_oblPost+simwol_neispravnosti;
-                    byte simvolSicurity      = readBuf[33];
-                    byte simvolKaretki       = readBuf[34];
-                    byte simvolOblPost       = readBuf[39];
-                    byte simvolNeispravnosti = readBuf[40];
+                    String simwol_neispravnosti = lenghtString.substring(40,41);*/
+                    //String sicurityAlarmStr = simwol_sicurity+polojenie_karetki+simwol_oblPost+simwol_neispravnosti;
 
-                    if (simvolKaretki<((byte)0x21)) {
+                    if (nordParser.getSimvolKaretki()<((byte)0x21)) {
                         if (karetkaMig){
-                            lenghtString = changeCharInPosition((byte)(simvolKaretki+1), ch, lenghtString);
+                            lenghtString = changeCharInPosition((byte)(nordParser.getSimvolKaretki()+1), ch, lenghtString);
                             karetkaMig = false;}
                         else{
                             karetkaMig = true;}
                     }
-                    int z = 0;for (int x = 0;x < 64; ++x){ readBuf[x] = (byte) z; }
                     /////////////////////////////////////////////
-                    //String str1 = lenghtString.substring(1, 17);keyboardStr1.setText(str1);
-                    //String str2 = lenghtString.substring(17, 33);keyboardStr2.setText(str2);
-                    keyboardStr1.setText(lenghtString.substring(1, 17));
-                    keyboardStr2.setText(lenghtString.substring(17, 33));
+                    keyboardViewModel.setKeyboardStr1(lenghtString.substring(1, 17).replaceAll(" ","  "));
+                    keyboardViewModel.setKeyboardStr2(lenghtString.substring(17, 33).replaceAll(" ","  "));
 
-                    if((simvolSicurity == securityLed_postavl_na_ohrany_sost_bez_avarii) || (simvolSicurity == securityLed_postavl_na_ohrany_sost_s_avariey) ){
+                    if((nordParser.getSimvolSicurity() == securityLed_postavl_na_ohrany_sost_bez_avarii) || (nordParser.getSimvolSicurity() == securityLed_postavl_na_ohrany_sost_s_avariey) )
+                    {
                         security.setImageResource(android.R.drawable.presence_online);
                     }
-                    if((simvolSicurity == securityLed_sniyato_s_ohrany_bez_avarii) || (simvolSicurity == securityLed_sniyato_s_ohrany_s_avariey) ){
+                    if((nordParser.getSimvolSicurity() == securityLed_sniyato_s_ohrany_bez_avarii) || (nordParser.getSimvolSicurity() == securityLed_sniyato_s_ohrany_s_avariey) )
+                    {
                         security.setImageResource(android.R.drawable.presence_invisible);
                         stop_security_led();
                         migalka_security_thread = true;
                     }
 
-                    if((simvolSicurity == securityLed_end_zaderjka_bez_avarii)|| (simvolSicurity == securityLed_end_zaderjka_s_avariey)){
-                        //security.setImageResource(android.R.drawable.presence_offline);
-                        //migalka_security_thread = true;
+                    if((nordParser.getSimvolSicurity() == securityLed_end_zaderjka_bez_avarii)|| (nordParser.getSimvolSicurity() == securityLed_end_zaderjka_s_avariey))
+                    {
                         stop_security_led();
                         migalka_security_thread = true;
                     }
 
                     if(migalka_security_thread){
-                        if(((simvolSicurity == securityLed_zaderjka_bez_avarii) || (simvolSicurity == securityLed_zaderjka_s_avariey))){
+                        if(((nordParser.getSimvolSicurity() == securityLed_zaderjka_bez_avarii) || (nordParser.getSimvolSicurity() == securityLed_zaderjka_s_avariey))){
                             migalka_security_thread = false;
                             start_security_led();
                         }
                     }
 
                     if(migalka_avariya_thread){
-                        if (((simvolNeispravnosti==stopInd1)||(simvolNeispravnosti==stopInd4)||(simvolNeispravnosti==stopInd5)||
-                                (simvolNeispravnosti==stopInd6)||(simvolNeispravnosti==stopInd7)||(simvolNeispravnosti==stopInd8)||
-                                (simvolNeispravnosti==stopInd8))){//&&(migalka_avariya_thread)
-
+                        if (((nordParser.getSimvolNeispravnosti()==stopInd1)||(nordParser.getSimvolNeispravnosti()==stopInd4)||(nordParser.getSimvolNeispravnosti()==stopInd5)||
+                                (nordParser.getSimvolNeispravnosti()==stopInd6)||(nordParser.getSimvolNeispravnosti()==stopInd7)||(nordParser.getSimvolNeispravnosti()==stopInd8)))
+                        {
                             migalka_avariya_thread = false;
                             start_avariya_led();
                         }
                     }
-                    if((simvolNeispravnosti==stopInd2)||
-                            (simvolNeispravnosti==stopInd3)){
+                    if((nordParser.getSimvolNeispravnosti()==stopInd2)|| (nordParser.getSimvolNeispravnosti()==stopInd3)){
                         migalka_avariya_thread = true;
 //                        avariya.setImageResource(android.R.drawable.presence_invisible);
                         stop_avariya_led();
                     }
-                    //alert.setImageResource(android.R.drawable.ic_notification_overlay);
-                    //security.setImageResource(android.R.drawable.presence_online);
-                    //alert.setImageResource(android.R.drawable.presence_offline);
-                    //security.setImageResource(android.R.drawable.presence_offline);
-                    //String sicurityAlarmStr = String.valueOf(simvolSicurity+simvolAlarm);
-
-                    try { sicurityAlarmStr = hexadecimal(sicurityAlarmStr, "CP866");}
-                    catch (UnsupportedEncodingException e) { e.printStackTrace(); }
+                    //try { sicurityAlarmStr = hexadecimal(sicurityAlarmStr, "CP866");}
+                    //catch (UnsupportedEncodingException e) { e.printStackTrace(); }
                     /////////////////////////////////////////////
                     String  StringToHexStart = lenghtString.substring(0, 1);
                     try { StringToHexStart = hexadecimal(StringToHexStart, "CP866");}
@@ -895,11 +847,9 @@ public class KeyboardFragment extends Fragment {
                     try { StringToHexStop = hexadecimal(StringToHexStop, "CP866");}
                     catch (UnsupportedEncodingException e) { e.printStackTrace(); }
                     //Log.v(TAG, StringToHexStop);
-                    String StringToHexNew = StringToHexStart + "__" + StringToHexStop+"<<>>"+sicurityAlarmStr;
-
-                    keyboardStr3.setText(StringToHexNew);                    // обновляем TextView3*/
+                    String StringToHexNew = StringToHexStart + "__" + StringToHexStop;//+"<<>>"+sicurityAlarmStr;
+                    keyboardViewModel.setKeyboardStr3(StringToHexNew);// обновляем TextView3
                     sb.delete(0, sb.length());                                      // и очищаем sb
-
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
                     // сохранить имя подключенного устройства

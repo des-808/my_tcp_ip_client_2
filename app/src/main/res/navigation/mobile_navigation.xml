@@ -101,7 +101,7 @@
         tools:layout="@layout/fragment_preference_page" />
     <fragment
         android:id="@+id/nav_bluetooth"
-        android:name="com.example.tcp_ip_client_2.ui.bluetooth.BlueToothFragment"
+        android:name="com.example.tcp_ip_client_2.DiviceFragment"
         android:label="@string/bluetooth"
         tools:layout="@layout/fragment_bluetooth" >
         <action

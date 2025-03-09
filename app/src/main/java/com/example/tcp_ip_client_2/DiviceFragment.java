@@ -1,4 +1,4 @@
-package com.example.tcp_ip_client_2.ui.bluetooth;
+package com.example.tcp_ip_client_2;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,18 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.example.tcp_ip_client_2.R;
-
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BlueToothFragment#newInstance} factory method to
+ * Use the {@link DiviceFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlueToothFragment extends Fragment {
+public class DiviceFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,7 +37,7 @@ public class BlueToothFragment extends Fragment {
     NavController navController;
     Vibrator vibrator;
 
-    public BlueToothFragment() {
+    public DiviceFragment() {
         // Required empty public constructor
     }
 
@@ -52,11 +47,11 @@ public class BlueToothFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BlueToothFragment.
+     * @return A new instance of fragment DiviceFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BlueToothFragment newInstance(String param1, String param2) {
-        BlueToothFragment fragment = new BlueToothFragment();
+    public static DiviceFragment newInstance(String param1, String param2) {
+        DiviceFragment fragment = new DiviceFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
